@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 import logo from '../../assets/images/logo.svg'
-import cartSvg from '../../assets/images/carrinho.svg'
+import cartSvg from '../../assets/images/cart.svg'
 
 const Header = () => (
   <S.Header>
@@ -10,20 +10,20 @@ const Header = () => (
       <nav>
         <S.Links>
           <li>
-            <a href="#">Categorias</a>
+            <a href="#">Categories</a>
           </li>
           <li>
-            <a href="#">Novidades</a>
+            <a href="#">New Eeleases</a>
           </li>
           <li>
-            <a href="#">Promoções</a>
+            <a href="#">Promos</a>
           </li>
         </S.Links>
       </nav>
     </div>
     <S.LinkCart href="#">
       0 - produtos
-      <img src={cartSvg} alt="carrinho" />
+      <img src={cartSvg} alt="cart" />
     </S.LinkCart>
   </S.Header>
 )
