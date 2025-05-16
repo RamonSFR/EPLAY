@@ -1,15 +1,24 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import Banner from './components/Banner'
 import Header from './components/Header'
 import GlobalStyle from './styles/globalStyle'
+
+const routes = createBrowserRouter([
+  {
+    path: '/',
+    element: <Banner />
+  }
+])
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <div className='container'>
+      <div className="container">
         <Header />
       </div>
-      <Banner />
+      <RouterProvider router={routes}/>
     </>
   )
 }
