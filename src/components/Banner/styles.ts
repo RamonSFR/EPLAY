@@ -13,7 +13,7 @@ export const Image = styled.div`
 `
 
 export const Title = styled.h2`
-  font: 36px;
+  font-size: 36px;
 
   max-width: 450px;
 `

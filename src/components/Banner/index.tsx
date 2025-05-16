@@ -1,4 +1,4 @@
-import * as S from './syles'
+import * as S from './styles'
 
 import bannerImg from '../../assets/images/expedition33-banner.jpg'
 
