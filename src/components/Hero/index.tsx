@@ -8,7 +8,7 @@ const Hero = () => (
     <div className="container">
       <div>
         <Tag>RPG</Tag>
-        <Tag>Steam | PS5 | Xbox Series X/S</Tag>
+        <Tag>Steam | PS5 | Xbox Series S/X</Tag>
       </div>
       <Infos>
         <h2>Clair Obscur: Expedition 33</h2>
