@@ -9,6 +9,10 @@ export const Header = styled.header`
   margin-bottom: 80px;
 
   justify-content: space-between;
+  
+  img {
+    cursor: pointer;
+  }
 
   &,
   div {
