@@ -1,6 +1,6 @@
 import * as S from './styles'
 
-import bannerImg from '../../assets/images/expedition33-banner.jpg'
+import bannerImg from '../../assets/images/banners/expedition33-banner.jpg'
 import Tag from '../Tag'
 import Button from '../Button'
 

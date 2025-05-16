@@ -1,7 +1,7 @@
 import * as S from './styles'
 
-import logo from '../../assets/images/logo.svg'
-import cartSvg from '../../assets/images/cart.svg'
+import logo from '../../assets/images/icons/logo.svg'
+import cartSvg from '../../assets/images/icons/cart.svg'
 
 const Header = () => (
   <S.Header>
