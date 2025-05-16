@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom'
 
 import { colors as c } from '../../styles/globalStyle'
 
-export const Btn = styled.button`
+type Props = {
+  variant?: 'primary' | 'secondary'
+}
+
+export const Btn = styled.button<Props>`
   padding: 8px 16px;
   font-size: 16px;
   border-radius: 8px;
   font-weight: bold;
-  border: 2px solid ${c.white};
+  border: 2px solid ${(props) => props.variant === 'primary' ? c.green : c.white};
   color: ${c.white};
-  background-color: transparent;
+  background-color: ${(props) => props.variant === 'primary' ? c.green : 'transparent'};
+  cursor: pointer;
 `
 
 export const BtnLink = styled(Link)`
