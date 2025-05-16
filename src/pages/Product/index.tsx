@@ -1,4 +1,5 @@
 // import { useParams } from "react-router-dom"
+import Gallery from '../../components/Gallery'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
@@ -29,11 +30,7 @@ const Product = () => {
           Chinese, and Traditional Chinese.
         </p>
       </Section>
-      <Section title='Gallery' background='black'>
-        <div>
-          pictures
-        </div>
-      </Section>
+      <Gallery />
     </>
   )
 }
