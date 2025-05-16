@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-import { colors } from '../../styles/globalStyle'
+import { colors as c } from '../../styles/globalStyle'
 
 export const Header = styled.header`
-  background-color: ${colors.grey};
+  background-color: ${c.grey};
   padding: 24px;
   border-radius: 16px;
   margin-bottom: 80px;
@@ -17,7 +17,7 @@ export const Header = styled.header`
   }
 
   a {
-    color: ${colors.white};
+    color: ${c.white};
     text-decoration: none;
     font-weight: bold;
   }
