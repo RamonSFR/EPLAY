@@ -93,7 +93,7 @@ const Categories = () => (
     <ProductsList games={promotions} title="RPG" background="grey" />
     <ProductsList games={bestSellers} title="Action" background="black" />
     <ProductsList games={promotions} title="FPS" background="grey" />
-    <ProductsList games={bestSellers} title="Action" background="black" />
+    <ProductsList games={bestSellers} title="Adventure" background="black" />
   </>
 )
 
