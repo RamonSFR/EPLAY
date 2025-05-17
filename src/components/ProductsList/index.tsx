@@ -20,7 +20,6 @@ const ProductsList = ({ background, title, games }: Props) => {
     const tags = []
     if (game.prices.discount) {
       tags.push(`${game.prices.discount}%`)
-
     }
 
     if (game.prices.current) {
@@ -33,24 +32,25 @@ const ProductsList = ({ background, title, games }: Props) => {
   const ApiLink = 'https://fake-api-seven-wine.vercel.app/'
 
   return (
-  <S.Container background={background}>
-    <div className="container">
-      <h2>{title}</h2>
-      <S.List>
-        {games.map(game => (
-          <Product
-          key={game.id}
-          category={game.details.category}
-          image={`${ApiLink}${game.media.thumbnail}`}
-          infos={getGameTags(game)}
-          system={game.details.system}
-          title={game.name}
-        />
-        ))}
-      </S.List>
-    </div>
-  </S.Container>
-)
+    <S.Container background={background}>
+      <div className="container">
+        <h2>{title}</h2>
+        <S.List>
+          {games.map((game) => (
+            <Product
+              key={game.id}
+              category={game.details.category}
+              image={`${ApiLink}${game.media.thumbnail}`}
+              infos={getGameTags(game)}
+              description={game.description}
+              system={game.details.system}
+              title={game.name}
+            />
+          ))}
+        </S.List>
+      </div>
+    </S.Container>
+  )
 }
 
 export default ProductsList

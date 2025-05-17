@@ -6,7 +6,7 @@ type Props = {
   title: string
   category: string
   system: string[]
-  description?: string
+  description: string
   infos: string[]
   image: string
 }
@@ -20,6 +20,12 @@ const Product = ({
   title
 }: Props) => {
   const setSystems = (system: string[]) => system.join(' | ')
+  const getDescription = (description: string) => {
+    if (description.length > 95) {
+      return description.slice(0, 92) + '...'
+    }
+    return description
+  }
 
   return (
     <S.Card>
@@ -32,7 +38,7 @@ const Product = ({
       <S.Title>{title}</S.Title>
       <Tag>{category}</Tag>
       {setSystems(system) && <Tag>{setSystems(system)}</Tag>}
-      <S.Description>{description}</S.Description>
+      <S.Description>{getDescription(description)}</S.Description>
     </S.Card>
   )
 }

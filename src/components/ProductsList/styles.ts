@@ -12,6 +12,9 @@ export const Container = styled.section<Omit<Props, 'title' | 'games'>>`
   ${Card} {
     background-color: ${(props) =>
       props.background === 'grey' ? c.black : c.grey};
+    box-shadow: 4px 4px 14px
+      ${(props) =>
+        props.background === 'grey' ? 'rgba(0,0,0,.45)' : 'rgba(51,51,51,.45)'};
   }
 `
 
