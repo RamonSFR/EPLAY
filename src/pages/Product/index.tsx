@@ -3,6 +3,8 @@ import Gallery from '../../components/Gallery'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
+import expedition33Cover from '../../assets/images/covers/cover-expedition33.avif'
+
 const Product = () => {
   // const {id} = useParams()
 
@@ -30,7 +32,7 @@ const Product = () => {
           Chinese, and Traditional Chinese.
         </p>
       </Section>
-      <Gallery />
+      <Gallery name="Expedition 33" defaultCover={expedition33Cover} />
     </>
   )
 }
