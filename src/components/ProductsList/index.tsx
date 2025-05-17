@@ -33,7 +33,7 @@ const ProductsList = ({ background, title, games }: Props) => {
     return tags
   }
 
-  const ApiLink = 'https://fake-api-seven-wine.vercel.app/'
+  const ApiLink = 'https://fake-api-seven-wine.vercel.app'
 
   return (
     <S.Container background={background}>
