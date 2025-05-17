@@ -18,6 +18,10 @@ const ProductsList = ({ background, title, games }: Props) => {
 
   const getGameTags = (game: Game) => {
     const tags = []
+    if (game.prices.current === null) {
+      tags.push('Coming Soon')
+    }
+
     if (game.prices.discount) {
       tags.push(`${game.prices.discount}%`)
     }

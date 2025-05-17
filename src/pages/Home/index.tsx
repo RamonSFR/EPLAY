@@ -34,11 +34,16 @@ export type Game = {
 
 const Home = () => {
   const [promo, setPromo] = useState<Game[]>([])
+  const [comingSoon, setComingSoon] = useState<Game[]>([])
 
   const fetchGames = async () => {
-    await fetch('https://fake-api-seven-wine.vercel.app/games')
+    await fetch('https://fake-api-seven-wine.vercel.app/promo')
       .then((res) => res.json())
       .then(res => setPromo(res))
+
+    await fetch('https://fake-api-seven-wine.vercel.app/comingsoon')
+      .then((res) => res.json())
+      .then(res => setComingSoon(res))
   }
 
   useEffect(() => {
@@ -49,11 +54,7 @@ const Home = () => {
     <>
       <Banner />
       <ProductsList games={promo} title="Promotions" background="grey" />
-      <ProductsList
-        games={promo}
-        title="Best Sellers"
-        background="black"
-      />
+      <ProductsList games={comingSoon} title="Coming Soon" background="black" />
     </>
   )
 }
