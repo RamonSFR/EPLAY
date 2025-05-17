@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import * as S from './styles'
 import Section from '../Section'
+import type { GalleryItem } from '../../pages/Home'
 
 import playIco from '../../assets/images/icons/play.png'
 import zoomIco from '../../assets/images/icons/zoom.png'
@@ -13,10 +14,7 @@ import expeditionImage3 from '../../assets/images/gallery/expedition33/image3.jp
 import expeditionVideo1 from '../../assets/videos/gallery/expedition33/video1.webm'
 import expeditionVideo2 from '../../assets/videos/gallery/expedition33/video2.webm'
 
-interface GalleryItem {
-  type: 'image' | 'video'
-  url: string
-}
+
 
 type Props = {
   defaultCover: string

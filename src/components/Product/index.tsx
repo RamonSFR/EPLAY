@@ -5,8 +5,8 @@ import * as S from './styles'
 type Props = {
   title: string
   category: string
-  systems: string
-  description: string
+  system: string[]
+  description?: string
   infos: string[]
   image: string
 }
@@ -16,19 +16,25 @@ const Product = ({
   description,
   image,
   infos,
-  systems,
+  system,
   title
-}: Props) => (
-  <S.Card>
-    <img draggable={false} src={image} />
-    <S.Infos>
-      {infos.map(info => <Tag key={info}>{info}</Tag>)}
-    </S.Infos>
-    <S.Title>{title}</S.Title>
-    <Tag>{category}</Tag>
-    <Tag>{systems}</Tag>
-    <S.Description>{description}</S.Description>
-  </S.Card>
-)
+}: Props) => {
+  const setSystems = (system: string[]) => system.join(' | ')
+
+  return (
+    <S.Card>
+      <img draggable={false} src={image} />
+      <S.Infos>
+        {infos.map((info) => (
+          <Tag key={info}>{info}</Tag>
+        ))}
+      </S.Infos>
+      <S.Title>{title}</S.Title>
+      <Tag>{category}</Tag>
+      {setSystems(system) && <Tag>{setSystems(system)}</Tag>}
+      <S.Description>{description}</S.Description>
+    </S.Card>
+  )
+}
 
 export default Product

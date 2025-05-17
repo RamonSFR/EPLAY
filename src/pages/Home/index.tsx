@@ -1,100 +1,61 @@
+import { useEffect, useState } from 'react'
+
 import Banner from '../../components/Banner'
 import ProductsList from '../../components/ProductsList'
-import type Game from '../../models/Game'
 
-import mw3 from '../../assets/images/covers/cover-mw3.png'
-import bo6 from '../../assets/images/covers/cover-bo6.png'
-import tunic from '../../assets/images/covers/cover-tunic.jpg'
-import tlou2 from '../../assets/images/covers/cover-tlou2.avif'
-import sh2 from '../../assets/images/covers/cover-silenthill2.avif'
-import bloodborne from '../../assets/images/covers/cover-bloodborne.jpg'
-import eldenring from '../../assets/images/covers/cover-eldenring.jpg'
-import cyberpunk from '../../assets/images/covers/cover-cyberpunk2077.jpg'
+export interface GalleryItem {
+  type: 'image' | 'video'
+  url: string
+}
 
-const promotions: Game[] = [
-  {
-    id: 1,
-    title: 'Call of Duty Modern Warfare III',
-    description: 'lorem ipsum dolor',
-    category: 'FPS',
-    infos: ['10%', '$55.90'],
-    image: mw3,
-    systems: 'Steam | PS5'
-  },
-  {
-    id: 2,
-    title: 'Call of Duty Black Ops 6',
-    description: 'lorem ipsum dolor',
-    category: 'FPS',
-    infos: ['10%', '$70'],
-    image: bo6,
-    systems: 'Steam | PS5'
-  },
-  {
-    id: 3,
-    title: 'Tunic',
-    description: 'lorem ipsum dolor',
-    category: 'Adventure',
-    infos: ['45%', '$19.99'],
-    image: tunic,
-    systems: 'Steam | Xbox Series S/X | PS5'
-  },
-  {
-    id: 4,
-    title: 'The Last of Us Part II',
-    description: 'lorem ipsum dolor',
-    category: 'Narrative',
-    infos: ['15%', '$50'],
-    image: tlou2,
-    systems: 'Steam | PS5'
+export type Game = {
+  id: number
+  name: string
+  description: string
+  release_date?: string
+  prices: {
+    discount?: number
+    old?: number
+    current?: number
   }
-]
-
-const bestSellers: Game[] = [
-  {
-    id: 5,
-    title: 'Silent Hill 2',
-    description: 'lorem ipsum dolor',
-    category: 'Survival Horror',
-    infos: ['25%', '$50'],
-    image: sh2,
-    systems: 'Steam | PS5'
-  },
-  {
-    id: 6,
-    title: 'BloodBorne',
-    description: 'lorem ipsum dolor',
-    category: 'Souslike',
-    infos: ['10%', '$70'],
-    image: bloodborne,
-    systems: 'PS4 | PS5'
-  },
-  {
-    id: 7,
-    title: 'Cyberpunk 2077',
-    description: 'lorem ipsum dolor',
-    category: 'RPG',
-    infos: ['45%', '$30'],
-    image: cyberpunk,
-    systems: 'Steam | Xbox Series S/X | PS5'
-  },
-  {
-    id: 8,
-    title: 'Elden Ring',
-    description: 'lorem ipsum dolor',
-    category: 'Soulslike',
-    infos: ['40$', '$40'],
-    image: eldenring,
-    systems: 'Steam | Xbox Series S/X | PS5'
+  details: {
+    category: string
+    system: string[]
+    developer: string
+    publisher: string
+    languages: string[]
   }
-]
+  media: {
+    thumbnail: string
+    cover: string
+    gallery: GalleryItem[]
+  }
+}
 
-const Home = () => (
-  <>
-    <Banner />
-    <ProductsList games={promotions} title="Promotions" background="grey" />
-    <ProductsList games={bestSellers} title="Best Sellers" background="black" />
-  </>
-)
+const Home = () => {
+  const [promo, setPromo] = useState<Game[]>([])
+
+  const fetchGames = async () => {
+    await fetch('https://fake-api-seven-wine.vercel.app/games')
+      .then((res) => res.json())
+      .then(res => setPromo(res))
+  }
+
+  useEffect(() => {
+    fetchGames()
+  }, [])
+
+  return (
+    <>
+      <Banner />
+      <ProductsList games={promo} title="Promotions" background="grey" />
+      <ProductsList
+        games={promo}
+        title="Best Sellers"
+        background="black"
+      />
+    </>
+  )
+}
 
 export default Home
