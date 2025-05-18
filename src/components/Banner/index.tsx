@@ -5,6 +5,7 @@ import * as S from './styles'
 import Tag from '../Tag'
 import Button from '../Button'
 import type { Game } from '../../pages/Home'
+import { priceFormatter } from '../ProductsList'
 
 const Banner = () => {
   const [game, setGame] = useState<Game>()
@@ -15,27 +16,32 @@ const Banner = () => {
       .then((res) => setGame(res))
   }, [])
 
+  if (!game) {
+    return <h3>Loading...</h3>
+  }
+
   return (
     <S.Image
-      style={{ backgroundImage: `url(https://fake-api-seven-wine.vercel.app${game?.media.cover})` }}
-
+      style={{
+        backgroundImage: `url(https://fake-api-seven-wine.vercel.app${game?.media.cover})`
+      }}
     >
       <div className="container">
         <Tag size="big">Highlighted game</Tag>
         <div>
-          <S.Title>{game?.name}</S.Title>
+          <S.Title>{game.name}</S.Title>
           <S.Prices>
-            {game?.prices.current === null ? (
+            {game.prices.current === null ? (
               <>Coming Soon</>
             ) : (
               <>
                 {game?.prices.old ? (
                   <>
-                    from <span>${game.prices.old}</span> <br />
-                    to ${game.prices.current}
+                    from <span>{priceFormatter(game.prices.old)}</span> <br />
+                    to {priceFormatter(game.prices.current)}
                   </>
                 ) : (
-                  <>${game?.prices.current}</>
+                  <>{priceFormatter(game?.prices.current)}</>
                 )}
               </>
             )}
