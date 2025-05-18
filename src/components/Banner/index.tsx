@@ -8,7 +8,6 @@ import type { Game } from '../../pages/Home'
 
 const Banner = () => {
   const [game, setGame] = useState<Game>()
-  const ApiLink = 'https://fake-api-seven-wine.vercel.app'
 
   useEffect(() => {
     fetch('https://fake-api-seven-wine.vercel.app/highlight')
@@ -18,9 +17,8 @@ const Banner = () => {
 
   return (
     <S.Image
-      style={{
-        backgroundImage: `${ApiLink}${game?.media.cover})`
-      }}
+      style={{ backgroundImage: `url(https://fake-api-seven-wine.vercel.app${game?.media.cover})` }}
+
     >
       <div className="container">
         <Tag size="big">Highlighted game</Tag>
