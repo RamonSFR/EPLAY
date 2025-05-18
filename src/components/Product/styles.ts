@@ -18,6 +18,7 @@ export const Card = styled.div`
     display: block;
     height: 250px;
     width: 100%;
+    border-radius: 4px;
     object-fit: cover;
   }
 `
