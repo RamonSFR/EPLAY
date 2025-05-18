@@ -17,7 +17,7 @@ const Banner = () => {
   }, [])
 
   if (!game) {
-    return <h3>Loading...</h3>
+    return <div className="container"><h3>Loading...</h3></div>
   }
 
   return (
@@ -49,7 +49,7 @@ const Banner = () => {
         </div>
         <Button
           type="link"
-          to="/product"
+          to={`/product/${game.id}`}
           title="click here to enjoy this offer"
         >
           Check it out

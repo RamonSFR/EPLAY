@@ -1,38 +1,46 @@
-// import { useParams } from "react-router-dom"
+import { useEffect, useState } from 'react'
+import { useParams } from "react-router-dom"
 import Gallery from '../../components/Gallery'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
-import expedition33Cover from '../../assets/images/covers/cover-expedition33.avif'
+import type { Game } from '../Home'
 
 const Product = () => {
-  // const {id} = useParams()
+  const {id} = useParams()
+  const [game, setGame] = useState<Game>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-seven-wine.vercel.app/games/${id}`)
+      .then((res) => res.json())
+      .then((res) => setGame(res))
+  }, [id])
+
+  if (!game) {
+    return (
+      <div className="container">
+        <h3>Loading...</h3>
+      </div>
+    )
+  }
 
   return (
     <>
-      <Hero />
+      <Hero game={game}/>
       <Section title="About the game" background="black">
         <p>
-          Clair Obscur: Expedition 33 is a turn-based RPG set in a dark fantasy
-          world inspired by Belle Époque France. Players lead Expedition 33 on a
-          desperate mission to stop the Artífice, a mysterious entity that
-          annually paints a number—marking all people of that age for death.
-          With a gripping narrative, strategic combat blending real-time
-          mechanics, and stunning visuals, the game delivers an emotional
-          journey of hope, loss, and defiance against fate.
+          {game.description}
         </p>
       </Section>
       <Section title="More details" background="grey">
         <p>
           <b>Platform:</b> Steam, PS5, Xbox Series S/X <br />
-          <b>Developer:</b> Sandfall Interactive, Sandfall S.A.S. <br />
-          <b>Studio:</b> Kepler Interactive <br />
-          <b>Languages: </b>English, French, Italian, German, Spanish (Spain),
-          Japanese, Korean, Polish, Portuguese (Brazil), Russian, Simplified
-          Chinese, and Traditional Chinese.
+          <b>Developer:</b> {game.details.developer} <br />
+          <b>Studio:</b> {game.details.publisher} <br />
+          <b>Languages: </b>{game.details.languages.join(', ')}
         </p>
       </Section>
-      <Gallery name="Expedition 33" defaultCover={expedition33Cover} />
+      <Gallery items={game.media.gallery} name={game.name} defaultCover={game.media.cover} />
     </>
   )
 }

@@ -3,6 +3,7 @@ import Tag from '../Tag'
 import * as S from './styles'
 
 type Props = {
+  id: number
   title: string
   category: string
   system: string[]
@@ -12,6 +13,7 @@ type Props = {
 }
 
 const Product = ({
+  id,
   category,
   description,
   image,
@@ -28,7 +30,7 @@ const Product = ({
   }
 
   return (
-    <S.Card>
+    <S.Card to={`/product/${id}`}>
       <img draggable={false} src={image} />
       <S.Infos>
         {infos.map((info) => (
