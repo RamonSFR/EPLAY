@@ -3,12 +3,11 @@ import Button from '../Button'
 import Tag from '../Tag'
 import { Banner, Infos } from './styles'
 import { priceFormatter } from '../ProductsList'
+import { setSystems } from '../../utils/functions'
 
 type Props = {
   game: Game
 }
-
-const setSystems = (system: string[]) => system.join(' | ')
 
 const Hero = ({ game }: Props) => {
   if (!game) {

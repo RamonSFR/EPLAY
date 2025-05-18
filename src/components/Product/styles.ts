@@ -13,6 +13,9 @@ export const Card = styled(Link)`
   text-decoration: none;
   color: ${c.white};
   display: block;
+  max-height: 450px;
+  height: 100%;
+  overflow-y: hidden;
 
   ${TagContainer} {
     margin-right: 8px;

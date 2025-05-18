@@ -1,3 +1,4 @@
+import { setSystems } from '../../utils/functions'
 import Tag from '../Tag'
 
 import * as S from './styles'
@@ -21,7 +22,6 @@ const Product = ({
   system,
   title
 }: Props) => {
-  const setSystems = (system: string[]) => system.join(' | ')
   const getDescription = (description: string) => {
     if (description.length > 95) {
       return description.slice(0, 92) + '...'

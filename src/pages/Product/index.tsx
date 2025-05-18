@@ -5,6 +5,7 @@ import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
 import type { Game } from '../Home'
+import { setSystems } from '../../utils/functions'
 
 const Product = () => {
   const {id} = useParams()
@@ -34,7 +35,7 @@ const Product = () => {
       </Section>
       <Section title="More details" background="grey">
         <p>
-          <b>Platform:</b> Steam, PS5, Xbox Series S/X <br />
+          <b>Platform:</b> { setSystems(game.details.system) }<br />
           <b>Developer:</b> {game.details.developer} <br />
           <b>Studio:</b> {game.details.publisher} <br />
           <b>Languages: </b>{game.details.languages.join(', ')}
