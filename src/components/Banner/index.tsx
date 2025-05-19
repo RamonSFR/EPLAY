@@ -2,8 +2,8 @@ import * as S from './styles'
 
 import Tag from '../Tag'
 import Button from '../Button'
-import { priceFormatter } from '../ProductsList'
-import { useGetFeaturedGameQuery } from '../../services/api'
+import { ApiPath, useGetFeaturedGameQuery } from '../../services/api'
+import priceFormatter from '../../utils/functions/priceFormatter'
 
 
 const Banner = () => {
@@ -20,7 +20,7 @@ const Banner = () => {
   return (
     <S.Image
       style={{
-        backgroundImage: `url(https://fake-api-seven-wine.vercel.app${game?.media.cover})`
+        backgroundImage: `url(${ApiPath}${game?.media.cover})`
       }}
     >
       <div className="container">

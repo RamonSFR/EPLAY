@@ -4,10 +4,12 @@ import type { Game } from '../../pages/Home'
 
 type CartState = {
   items: Game[]
+  isOpen: boolean
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  isOpen: false
 }
 
 const cartSlice = createSlice({
@@ -22,9 +24,21 @@ const cartSlice = createSlice({
       } else {
         state.items.push(item)
       }
+    },
+    open: (state) => {
+      state.isOpen = true
+    },
+    close: (state) => {
+      state.isOpen = false
+    },
+    clear: (state) => {
+      state.items = []
+    },
+    remove: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload)
     }
   }
 })
 
-export const { add } = cartSlice.actions
+export const { add, open, close, remove, clear } = cartSlice.actions
 export default cartSlice.reducer

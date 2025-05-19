@@ -1,15 +1,26 @@
+import { useDispatch } from 'react-redux'
+
 import type { Game } from '../../pages/Home'
+import { Banner, Infos } from './styles'
+import priceFormatter from '../../utils/functions/priceFormatter'
+import setSystems from '../../utils/functions/setSystems'
+import { add, open } from '../../store/reducers/cart'
 import Button from '../Button'
 import Tag from '../Tag'
-import { Banner, Infos } from './styles'
-import { priceFormatter } from '../ProductsList'
-import { setSystems } from '../../utils/functions'
+import { ApiPath } from '../../services/api'
 
 type Props = {
   game: Game
 }
 
 const Hero = ({ game }: Props) => {
+  const dispatch = useDispatch()
+
+  const addGameToCart = () => {
+    dispatch(add(game))
+    dispatch(open())
+  }
+
   if (!game) {
     return (
       <div className="container">
@@ -21,7 +32,7 @@ const Hero = ({ game }: Props) => {
   return (
     <Banner
       style={{
-        backgroundImage: `url(https://fake-api-seven-wine.vercel.app${game.media.cover})`
+        backgroundImage: `url(${ApiPath}${game.media.cover})`
       }}
     >
       <div className="container">
@@ -45,8 +56,9 @@ const Hero = ({ game }: Props) => {
               )}
               <Button
                 type="button"
-                title="click to add this game to shopping cart"
+                title="click to add this game to the shopping cart"
                 variant="primary"
+                onClick={() => addGameToCart()}
               >
                 Add to cart
               </Button>

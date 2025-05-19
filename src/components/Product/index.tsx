@@ -1,4 +1,4 @@
-import { setSystems } from '../../utils/functions'
+import setSystems from '../../utils/functions/setSystems'
 import Tag from '../Tag'
 
 import * as S from './styles'

@@ -21,16 +21,20 @@ export const CartContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   justify-content: flex-end;
   z-index: 1;
+
+  &.is-open {
+    display: flex;
+  }
 `
 
 export const SideBar = styled.aside`
   background-color: ${c.grey};
   z-index: 1;
   padding: 40px 16px 0 16px;
-  max-width: 360px;
+  max-width: 512px;
   width: 100%;
 
   ${Btn} {
@@ -69,7 +73,7 @@ export const CartItem = styled.li`
 
   img {
     width: 80px;
-    width: 80px;
+    height: 80px;
     object-fit: cover;
     margin-right: 24px;
   }

@@ -9,7 +9,7 @@ export const Header = styled.header`
   margin-bottom: 80px;
 
   justify-content: space-between;
-  
+
   img {
     cursor: pointer;
   }
@@ -36,9 +36,10 @@ export const Links = styled.ul`
   }
 `
 
-export const LinkCart = styled.a`
+export const CartButton = styled.a`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   img {
     margin-left: 16px;

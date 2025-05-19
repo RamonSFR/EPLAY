@@ -1,4 +1,6 @@
 import type { Game } from '../../pages/Home'
+import { ApiPath } from '../../services/api'
+import priceFormatter from '../../utils/functions/priceFormatter'
 import Product from '../Product'
 import * as S from './styles'
 
@@ -8,12 +10,7 @@ export type Props = {
   games: Game[]
 }
 
-export const priceFormatter = (price = 0) => {
-  return new Intl.NumberFormat('en', {
-    style: 'currency',
-    currency: 'USD'
-  }).format(price)
-}
+
 
 const ProductsList = ({ background, title, games }: Props) => {
   const getGameTags = (game: Game) => {
@@ -33,8 +30,6 @@ const ProductsList = ({ background, title, games }: Props) => {
     return tags
   }
 
-  const ApiLink = 'https://fake-api-seven-wine.vercel.app'
-
   return (
     <S.Container background={background}>
       <div className="container">
@@ -46,7 +41,7 @@ const ProductsList = ({ background, title, games }: Props) => {
                 key={game.id}
                 id={game.id}
                 category={game.details.category}
-                image={`${ApiLink}${game.media.thumbnail}`}
+                image={`${ApiPath}${game.media.thumbnail}`}
                 infos={getGameTags(game)}
                 description={game.description}
                 system={game.details.system}

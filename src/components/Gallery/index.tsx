@@ -7,6 +7,7 @@ import type { GalleryItem } from '../../pages/Home'
 import playIco from '../../assets/images/icons/play.png'
 import zoomIco from '../../assets/images/icons/zoom.png'
 import closeIco from '../../assets/images/icons/close.png'
+import { ApiPath } from '../../services/api'
 
 type Props = {
   defaultCover: string
@@ -18,8 +19,6 @@ interface ModalState extends GalleryItem {
   isVisible: boolean
 }
 
-const apiPath = 'https://fake-api-seven-wine.vercel.app'
-
 const Gallery = ({ defaultCover, name, items }: Props) => {
   const [modal, setModal] = useState<ModalState>({
     isVisible: false,
@@ -28,8 +27,8 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
   })
 
   const getMediaCover = (item: GalleryItem) => {
-    if (item.type === 'image') return `${apiPath}${item.url}`
-    return `${apiPath}${defaultCover}`
+    if (item.type === 'image') return `${ApiPath}${item.url}`
+    return `${ApiPath}${defaultCover}`
   }
 
   const getMediaIcon = (item: GalleryItem) => {
@@ -80,7 +79,7 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
             <img src={closeIco} onClick={() => closeModal()} alt="close icon" />
           </header>
           {modal.type === 'image' ? (
-            <img src={`${apiPath}${modal.url}`} />
+            <img src={`${ApiPath}${modal.url}`} />
           ) : (
             <iframe frameBorder={0} src={modal.url} />
           )}

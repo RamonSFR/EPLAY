@@ -1,15 +1,22 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import * as S from './styles'
 import logo from '../../assets/images/icons/logo.svg'
 import cartSvg from '../../assets/images/icons/cart.svg'
+import { open } from '../../store/reducers/cart'
+import type { RootReducer } from '../../store'
 
 const Header = () => {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { items } = useSelector((state:RootReducer) => state.cart)
+
   return (
     <S.Header>
       <div>
-        <img onClick={() => navigate('/')} src={logo} alt="EPLAY" />
+        <Link to="/">
+          <img src={logo} alt="EPLAY" />
+        </Link>
         <nav>
           <S.Links>
             <li>
@@ -24,10 +31,10 @@ const Header = () => {
           </S.Links>
         </nav>
       </div>
-      <S.LinkCart href="#">
-        0 - produtos
+      <S.CartButton onClick={() => dispatch(open())}>
+        {items.length} - produtos
         <img src={cartSvg} alt="cart" />
-      </S.LinkCart>
+      </S.CartButton>
     </S.Header>
   )
 }
