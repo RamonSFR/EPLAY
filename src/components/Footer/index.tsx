@@ -9,12 +9,12 @@ const Footer = () => (
         <S.SectionTitle>Categories</S.SectionTitle>
         <S.Links>
           <li><S.Link>RPG</S.Link></li>
-          <li><S.Link>FPS</S.Link></li>
+          <li><S.Link>Action/Adventure</S.Link></li>
           <li><S.Link>Horror</S.Link></li>
-          <li><S.Link>Soulslikes</S.Link></li>
+          <li><S.Link>FPS</S.Link></li>
           <li><S.Link>Sports</S.Link></li>
-          <li><S.Link>Adventure</S.Link></li>
-          <li><S.Link>Action</S.Link></li>
+          <li><S.Link>Simulation</S.Link></li>
+          <li><S.Link>Puzzle</S.Link></li>
         </S.Links>
       </S.FooterSection>
       <S.FooterSection>
