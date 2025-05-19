@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import type { RootReducer } from '../../store'
@@ -23,6 +24,13 @@ const Cart = () => {
     }, 0)
     return total
   }
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const total = getTotal()
 
