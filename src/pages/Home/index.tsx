@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
-
 import Banner from '../../components/Banner'
 import ProductsList from '../../components/ProductsList'
+import { useGetComingSoonQuery, useGetOnSaleQuery } from '../../services/api'
 
 export interface GalleryItem {
   type: 'image' | 'video'
@@ -33,28 +32,22 @@ export type Game = {
 }
 
 const Home = () => {
-  const [promo, setPromo] = useState<Game[]>([])
-  const [comingSoon, setComingSoon] = useState<Game[]>([])
+  const { data: onSaleGames } = useGetOnSaleQuery()
+  const { data: comingSoonGames } = useGetComingSoonQuery()
 
-  const fetchGames = async () => {
-    await fetch('https://fake-api-seven-wine.vercel.app/promo')
-      .then((res) => res.json())
-      .then(res => setPromo(res))
-
-    await fetch('https://fake-api-seven-wine.vercel.app/comingsoon')
-      .then((res) => res.json())
-      .then(res => setComingSoon(res))
+  if (!onSaleGames || !comingSoonGames) {
+    return (
+      <div className='container'>
+        <h3>Loading...</h3>
+      </div>
+    )
   }
-
-  useEffect(() => {
-    fetchGames()
-  }, [])
 
   return (
     <>
       <Banner />
-      <ProductsList games={promo} title="Promotions" background="grey" />
-      <ProductsList games={comingSoon} title="Coming Soon" background="black" />
+      <ProductsList games={onSaleGames} title="Promotions" background="grey" />
+      <ProductsList games={comingSoonGames} title="Coming Soon" background="black" />
     </>
   )
 }

@@ -1,23 +1,20 @@
-import { useEffect, useState } from 'react'
-
 import * as S from './styles'
 
 import Tag from '../Tag'
 import Button from '../Button'
-import type { Game } from '../../pages/Home'
 import { priceFormatter } from '../ProductsList'
+import { useGetFeaturedGameQuery } from '../../services/api'
+
 
 const Banner = () => {
-  const [game, setGame] = useState<Game>()
+  const {data: game, isLoading } = useGetFeaturedGameQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-seven-wine.vercel.app/highlight')
-      .then((res) => res.json())
-      .then((res) => setGame(res))
-  }, [])
-
-  if (!game) {
-    return <div className="container"><h3>Loading...</h3></div>
+  if (isLoading || !game) {
+    return (
+      <div className="container">
+        <h3>Loading...</h3>
+      </div>
+    )
   }
 
   return (
