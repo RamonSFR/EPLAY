@@ -1,9 +1,14 @@
 import styled from 'styled-components'
-import { colors as c } from '../../styles/globalStyle'
+import { breakpoints, colors as c } from '../../styles/globalStyle'
 
 export const Items = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
+
+  @media screen and (max-width: ${breakpoints.tabet}) {
+    gap: 8px;
+  }
 `
 
 export const Action = styled.div`
@@ -30,6 +35,16 @@ export const Item = styled.li`
     height: 150px;
     width: 150px;
     object-fit: cover;
+
+    @media screen and (max-width: ${breakpoints.tabet}) {
+      height: 125px;
+      width: 125px;
+    }
+
+    @media screen and (max-width: 500px) {
+      height: 100px;
+      width: 100px;
+    }
   }
 
   &:hover {
@@ -93,7 +108,8 @@ export const ModalContent = styled.div`
     width: 100%;
   }
 
-  img, iframe {
+  img,
+  iframe {
     display: block;
     max-width: 100%;
   }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import type { Props } from '.'
-import { colors as c } from '../../styles/globalStyle'
+import { breakpoints, colors as c } from '../../styles/globalStyle'
 import { Card } from '../Product/styles'
 
 export const Container = styled.section<Omit<Props, 'title' | 'games'>>`
@@ -24,11 +24,11 @@ export const List = styled.ul`
   gap: 24px;
   margin-top: 40px;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: ${breakpoints.desktop}) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media screen and (max-width: 763px) {
+  @media screen and (max-width: ${breakpoints.tabet}) {
     grid-template-columns: 1fr;
   }
 `

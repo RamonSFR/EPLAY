@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { colors as c } from '../../styles/globalStyle'
+import { breakpoints, colors as c } from '../../styles/globalStyle'
 
 export const Header = styled.header`
   background-color: ${c.grey};
@@ -24,6 +24,10 @@ export const Header = styled.header`
     color: ${c.white};
     text-decoration: none;
     font-weight: bold;
+  }
+
+  @media screen and (max-width: ${breakpoints.tabet}) {
+    display: none;
   }
 `
 

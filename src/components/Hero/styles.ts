@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { colors as c } from '../../styles/globalStyle'
+import { breakpoints, colors as c } from '../../styles/globalStyle'
 import { TagContainer } from '../Tag/styles'
 
 export const Banner = styled.div`
@@ -35,6 +35,11 @@ export const Banner = styled.div`
     z-index: 1;
     position: relative;
     justify-content: space-between;
+  }
+
+  @media screen and (max-width: ${breakpoints.tabet}) {
+    background-size: cover;
+    background-position-x: center;
   }
 `
 

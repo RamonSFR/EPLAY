@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors as c } from '../../styles/globalStyle'
+import { breakpoints, colors as c } from '../../styles/globalStyle'
 import { TagContainer } from '../Tag/styles'
 import { Btn } from '../Button/styles'
 import close from '../../assets/images/icons/close.png'
@@ -45,6 +45,10 @@ export const SideBar = styled.aside`
   ${Btn} {
     max-width: 100%;
     width: 100%;
+  }
+
+  @media screen and (max-width: ${breakpoints.tabet}) {
+    max-width: 250px;
   }
 `
 
@@ -94,6 +98,10 @@ export const CartItem = styled.li`
     font-size: 16px;
     font-weight: bold;
     color: ${c.white};
+
+    @media screen and (max-width: ${breakpoints.tabet}) {
+      font-size: 14px;
+    }
   }
 
   span {
@@ -101,10 +109,19 @@ export const CartItem = styled.li`
     font-size: 14px;
     font-weight: bold;
     color: ${c.white};
+
+    @media screen and (max-width: ${breakpoints.tabet}) {
+      margin-top: 24px;
+      font-size: 16px;
+    }
   }
 
   ${TagContainer} {
     margin: 8px 8px 16px 0;
+
+    @media screen and (max-width: ${breakpoints.tabet}) {
+      display: none;
+    }
   }
 
   button {

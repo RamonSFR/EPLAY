@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
+import { breakpoints } from '../../styles/globalStyle'
 
 export const Image = styled.div`
   width: 100%;
@@ -34,12 +35,21 @@ export const Image = styled.div`
     background-color: rgba(0,0,0,.7);
     content: '';
   }
+
+  @media screen and (max-width: ${breakpoints.tabet}) {
+    background-size: cover;
+    background-position-x: center;
+  }
 `
 
 export const Title = styled.h2`
   font-size: 36px;
-
   max-width: 450px;
+
+  @media screen and (max-width: ${breakpoints.tabet}) {
+    font-size: 28px;
+    max-width: 300px;
+  }
 `
 
 export const Prices = styled.p`
