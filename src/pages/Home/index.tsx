@@ -37,7 +37,7 @@ const Home = () => {
 
   if (!onSaleGames || !comingSoonGames) {
     return (
-      <div className='container'>
+      <div className="container">
         <h3>Loading...</h3>
       </div>
     )
@@ -46,8 +46,13 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <ProductsList games={onSaleGames} title="Promotions" background="grey" />
-      <ProductsList games={comingSoonGames} title="Coming Soon" background="black" />
+      <ProductsList games={onSaleGames} title="Promotions" background="grey" id='on-sale'/>
+      <ProductsList
+        id='coming-soon'
+        games={comingSoonGames}
+        title="Coming Soon"
+        background="black"
+      />
     </>
   )
 }

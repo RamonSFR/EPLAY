@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${colors.black};
     color: ${colors.white};
     padding-top: 40px;
+    scroll-behavior: smooth;
   }
 
   .container {
