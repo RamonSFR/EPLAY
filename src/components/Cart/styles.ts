@@ -36,6 +36,11 @@ export const SideBar = styled.aside`
   padding: 40px 16px 0 16px;
   max-width: 512px;
   width: 100%;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   ${Btn} {
     max-width: 100%;
@@ -62,6 +67,13 @@ export const Quantity = styled.p`
   font-size: 16px;
   font-weight: bold;
   color: ${c.white};
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 24px;
+    margin-right: 8px;
+  }
 `
 
 export const CartItem = styled.li`
@@ -105,5 +117,19 @@ export const CartItem = styled.li`
     position: absolute;
     top: 8;
     right: 0;
+  }
+`
+
+export const ClearCartBtn = styled(Btn)`
+  background-color: ${c.red};
+  border: none;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 16px;
+    margin-right: 2px;
   }
 `
