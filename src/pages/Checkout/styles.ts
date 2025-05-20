@@ -33,10 +33,10 @@ export const InputGroup = styled.div<InputGroupProps>`
     width: 100%;
     padding: 0 8px;
     max-width: ${(props) => props.maxwidth || 'auto'};
-  }
 
-  small {
-    color: ${c.red};
+    &.error {
+      border: 1px solid ${c.red};
+    }
   }
 `
 

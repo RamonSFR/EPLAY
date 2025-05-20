@@ -1,17 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useFormik } from 'formik'
+import { Navigate } from 'react-router-dom'
+import * as Yup from 'yup'
 
 import Button from '../../components/Button'
 import Card from '../../components/Card'
-import * as S from './styles'
+
 import creditCardIco from '../../assets/images/icons/credit-card.png'
 import barcodeIco from '../../assets/images/icons/barcode.png'
-import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
+import type { RootReducer } from '../../store'
+import getTotal from '../../utils/functions/getTotal'
+import parseToUsd from '../../utils/functions/parseToUsd'
+
+import * as S from './styles'
+
+type installment = {
+  quantity: number
+  amount: number
+  formattedAmount: string
+}
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
   const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const [installments, setInstallments] = useState<installment[]>([])
+
+  const totalPrice = getTotal(items)
+
   const form = useFormik({
     initialValues: {
       fullName: '',
@@ -124,15 +142,32 @@ const Checkout = () => {
     }
   })
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
-    const isTouched = fieldName in form.touched
-    const isInvalid = fieldName in form.errors
-
-    if (isTouched && isInvalid) {
-      return message
+  useEffect(() => {
+    const calculateInstallments = () => {
+      const installmentsArray: installment[] = []
+      for (let i = 1; i <= 6; i++) {
+        installmentsArray.push({
+          quantity: i,
+          amount: totalPrice / i,
+          formattedAmount: parseToUsd(totalPrice / i)
+        })
+      }
+      return installmentsArray
     }
 
-    return ''
+    if (totalPrice > 0) {
+      setInstallments(calculateInstallments())
+    }
+  }, [totalPrice])
+
+  if (items.length === 0) {
+    return <Navigate to="/" />
+  }
+
+  const checkInputsHasErrors = (fieldName: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+    return isTouched && isInvalid
   }
 
   return (
@@ -185,10 +220,8 @@ const Checkout = () => {
                     placeholder="Your Full Name"
                     id="fullName"
                     type="text"
+                    className={checkInputsHasErrors('fullName') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('fullName', form.errors.fullName)}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="address">Address</label>
@@ -200,10 +233,8 @@ const Checkout = () => {
                     placeholder="Your Adress"
                     id="cpf"
                     type="text"
+                    className={checkInputsHasErrors('address') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('address', form.errors.address)}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="zipCode">ZIP Code</label>
@@ -215,10 +246,8 @@ const Checkout = () => {
                     placeholder="Your ZIP Code"
                     id="zipCode"
                     type="number"
+                    className={checkInputsHasErrors('zipCode') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('zipCode', form.errors.zipCode)}
-                  </small>
                 </S.InputGroup>
               </S.Row>
               <h3 className="margin-top">
@@ -235,13 +264,10 @@ const Checkout = () => {
                     placeholder="Your E-Mail"
                     id="deliveryEmail"
                     type="text"
+                    className={
+                      checkInputsHasErrors('deliveryEmail') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'deliveryEmail',
-                      form.errors.deliveryEmail
-                    )}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="confirmDeliveryEmail">Confirm E-mail</label>
@@ -253,13 +279,12 @@ const Checkout = () => {
                     placeholder="Confirm E-Mail"
                     id="confirmDeliveryEmail"
                     type="text"
+                    className={
+                      checkInputsHasErrors('confirmDeliveryEmail')
+                        ? 'error'
+                        : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'confirmDeliveryEmail',
-                      form.errors.confirmDeliveryEmail
-                    )}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="phone">Phone Number</label>
@@ -270,22 +295,24 @@ const Checkout = () => {
                     value={form.values.phone}
                     type="tel"
                     placeholder="(000) 000-0000"
+                    className={checkInputsHasErrors('phone') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('phone', form.errors.phone)}</small>
                 </S.InputGroup>
               </S.Row>
             </>
           </Card>
           <Card title="Payment">
             <div>
-              <S.TabButton
+                <S.TabButton
+                  type='button'
                 className={!payWithCard ? 'isActive' : ''}
                 onClick={() => setPayWithCard(false)}
               >
                 <img src={barcodeIco} alt="bank slip" />
                 <span>Bank Slip</span>
               </S.TabButton>
-              <S.TabButton
+                <S.TabButton
+                  type='button'
                 className={payWithCard ? 'isActive' : ''}
                 onClick={() => setPayWithCard(true)}
               >
@@ -313,10 +340,10 @@ const Checkout = () => {
                         id="cardName"
                         type="text"
                         value={form.values.cardName}
+                        className={
+                          checkInputsHasErrors('cardName') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage('cardName', form.errors.cardName)}
-                      </small>
                     </S.InputGroup>
                     <S.InputGroup>
                       <label htmlFor="cardNumber">Card Number</label>
@@ -329,10 +356,10 @@ const Checkout = () => {
                         id="cardNumber"
                         type="text"
                         maxLength={16}
+                        className={
+                          checkInputsHasErrors('cardNumber') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage('cardNumber', form.errors.cardNumber)}
-                      </small>
                     </S.InputGroup>
                   </S.Row>
                   <S.Row margintop="24px">
@@ -346,13 +373,10 @@ const Checkout = () => {
                         placeholder="MM/YY"
                         maxLength={4}
                         value={form.values.expirationDate}
+                        className={
+                          checkInputsHasErrors('expirationDate') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage(
-                          'expirationDate',
-                          form.errors.expirationDate
-                        )}
-                      </small>
                     </S.InputGroup>
                     <S.InputGroup maxwidth="64px" defaultflex="flex">
                       <label htmlFor="cvv">CVV</label>
@@ -365,8 +389,8 @@ const Checkout = () => {
                         id="cvv"
                         type="text"
                         maxLength={3}
+                        className={checkInputsHasErrors('cvv') ? 'error' : ''}
                       />
-                      <small>{getErrorMessage('cvv', form.errors.cvv)}</small>
                     </S.InputGroup>
                     <S.InputGroup maxwidth="200px">
                       <label htmlFor="installments">Installments</label>
@@ -376,17 +400,17 @@ const Checkout = () => {
                         name="installments"
                         value={form.values.installments}
                         id="installments"
+                        className={
+                          checkInputsHasErrors('installments') ? 'error' : ''
+                        }
                       >
-                        <option>1x $200</option>
-                        <option>2x $100</option>
-                        <option>3x $66.70</option>
+                        {totalPrice >= 100 ? (installments.map((installment) => (
+                          <option key={installment.quantity}>
+                            {installment.quantity}x of{' '}
+                            {installment.formattedAmount}
+                          </option>
+                        ))) : (<option>1x of {parseToUsd(totalPrice)}</option>)}
                       </select>
-                      <small>
-                        {getErrorMessage(
-                          'installments',
-                          form.errors.installments
-                        )}
-                      </small>
                     </S.InputGroup>
                   </S.Row>
                 </>

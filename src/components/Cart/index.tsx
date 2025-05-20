@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '../Button'
 import Tag from '../Tag'
@@ -12,20 +13,26 @@ import { ApiPath } from '../../services/api'
 
 import setSystems from '../../utils/functions/setSystems'
 
-
 import * as S from './styles'
 import parseToUsd from '../../utils/functions/parseToUsd'
+import getTotal from '../../utils/functions/getTotal'
 
 const Cart = () => {
   const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const getTotal = () => {
-    const total = items.reduce((acc, item) => {
-      return acc + item.prices.current!
-    }, 0)
-    return total
+  const goToCheckout = () => {
+    navigate('/checkout')
+    dispatch(close())
   }
+
+  const clearCart = () => {
+    dispatch(clear())
+    dispatch(close())
+  }
+
+
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -34,7 +41,7 @@ const Cart = () => {
     }
   }, [isOpen])
 
-  const total = getTotal()
+  const total = getTotal(items)
 
   return (
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
@@ -67,12 +74,16 @@ const Cart = () => {
             <S.ClearCartBtn
               type="button"
               title="click to clear your cart"
-              onClick={() => dispatch(clear())}
+              onClick={clearCart}
             >
               <img src={trashIco} alt="cart" />
               Clear Cart
             </S.ClearCartBtn>
-            <Button type="button" title="click to finish your purchase">
+            <Button
+              onClick={goToCheckout}
+              type="button"
+              title="click to finish your purchase"
+            >
               Proceed to Checkout
             </Button>
           </>
