@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import * as S from './styles'
 import Section from '../Section'
 import type { GalleryItem } from '../../pages/Home'
 
@@ -8,6 +7,8 @@ import playIco from '../../assets/images/icons/play.png'
 import zoomIco from '../../assets/images/icons/zoom.png'
 import closeIco from '../../assets/images/icons/close.png'
 import { ApiPath } from '../../services/api'
+
+import * as S from './styles'
 
 type Props = {
   defaultCover: string

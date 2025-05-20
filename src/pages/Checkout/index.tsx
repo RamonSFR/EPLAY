@@ -48,7 +48,7 @@ const Checkout = () => {
       phone: Yup.string().min(10, 'Phone number must have at least 10 digits'),
 
       // Payment Info
-      cardName: Yup.string().when((values, schema) =>
+      cardName: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
               .min(3, 'Name on card must be at least 3 characters long')
@@ -56,7 +56,7 @@ const Checkout = () => {
           : schema
       ),
 
-      cardNumber: Yup.string().when((values, schema) =>
+      cardNumber: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
               .min(16, 'Card number must have 16 digits')
@@ -66,7 +66,7 @@ const Checkout = () => {
           : schema
       ),
 
-      expirationDate: Yup.string().when((values, schema) =>
+      expirationDate: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
               .matches(
@@ -77,7 +77,7 @@ const Checkout = () => {
           : schema
       ),
 
-      cvv: Yup.string().when((values, schema) =>
+      cvv: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
               .matches(/^[0-9]{3}$/, 'Invalid CVV')

@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { HashLink } from 'react-router-hash-link'
 
-import * as S from './styles'
 import logo from '../../assets/images/icons/logo.svg'
 import cartSvg from '../../assets/images/icons/cart.svg'
 import { open } from '../../store/reducers/cart'
 import type { RootReducer } from '../../store'
+import * as S from './styles'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -28,13 +29,22 @@ const Header = () => {
           <nav>
             <S.Links>
               <S.LinkItem>
-                <Link to="/categories">Categories</Link>
+                <Link title="click to access categories page" to="/categories">
+                  Categories
+                </Link>
               </S.LinkItem>
               <S.LinkItem>
-                <Link to="/releases">Releases</Link>
+                <HashLink
+                  title="click to access coming soon section"
+                  to="/#soon"
+                >
+                  Releases
+                </HashLink>
               </S.LinkItem>
               <S.LinkItem>
-                <Link to="/promos">Promos</Link>
+                <HashLink title="click to access sales section" to="/#on-sale">
+                  Sales
+                </HashLink>
               </S.LinkItem>
             </S.Links>
           </nav>
@@ -50,13 +60,27 @@ const Header = () => {
       <S.NavMobile className={navIsOpen ? '-isOpen' : ''}>
         <S.Links>
           <S.LinkItem>
-            <Link to="/categories">Categories</Link>
+            <Link onClick={() => setNavIsOpen(false)} to="/categories">
+              Categories
+            </Link>
           </S.LinkItem>
           <S.LinkItem>
-            <Link to="/releases">Releases</Link>
+            <HashLink
+              onClick={() => setNavIsOpen(false)}
+              title="click to access coming soon section"
+              to="/#soon"
+            >
+              Coming Soon
+            </HashLink>
           </S.LinkItem>
           <S.LinkItem>
-            <Link to="/promos">Promos</Link>
+            <HashLink
+              onClick={() => setNavIsOpen(false)}
+              title="click to access sales section"
+              to="/#on-sale"
+            >
+              Sales
+            </HashLink>
           </S.LinkItem>
         </S.Links>
       </S.NavMobile>

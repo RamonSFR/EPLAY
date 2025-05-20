@@ -1,15 +1,15 @@
-import * as S from './styles'
-
 import Tag from '../Tag'
 import Button from '../Button'
+
 import { ApiPath, useGetFeaturedGameQuery } from '../../services/api'
 import priceFormatter from '../../utils/functions/priceFormatter'
 
+import * as S from './styles'
 
 const Banner = () => {
-  const {data: game, isLoading } = useGetFeaturedGameQuery()
+  const { data: game } = useGetFeaturedGameQuery()
 
-  if (isLoading || !game) {
+  if (!game) {
     return (
       <div className="container">
         <h3>Loading...</h3>

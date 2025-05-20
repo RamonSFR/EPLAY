@@ -1,18 +1,19 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import type { RootReducer } from '../../store'
-import { clear, close, remove } from '../../store/reducers/cart'
-import { ApiPath } from '../../services/api'
-
-import * as S from './styles'
 import Button from '../Button'
 import Tag from '../Tag'
 import cartIco from '../../assets/images/icons/cart.svg'
 import trashIco from '../../assets/images/icons/trash.svg'
 
+import type { RootReducer } from '../../store'
+import { clear, close, remove } from '../../store/reducers/cart'
+import { ApiPath } from '../../services/api'
+
 import setSystems from '../../utils/functions/setSystems'
 import priceFormatter from '../../utils/functions/priceFormatter'
+
+import * as S from './styles'
 
 const Cart = () => {
   const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
@@ -26,11 +27,11 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   const total = getTotal()
 
