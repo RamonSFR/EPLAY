@@ -319,22 +319,22 @@ const Checkout = () => {
           </Card>
           <Card title="Payment">
             <div>
-                <S.TabButton
-                  type="button"
-                  className={!payWithCard ? 'isActive' : ''}
-                  onClick={() => setPayWithCard(false)}
-                >
-                  <img src={barcodeIco} alt="bank slip" />
-                  <span>Bank Slip</span>
-                </S.TabButton>
-                <S.TabButton
-                  type="button"
-                  className={payWithCard ? 'isActive' : ''}
-                  onClick={() => setPayWithCard(true)}
-                >
-                  <img src={creditCardIco} alt="credit card" />
-                  <span>Credit Card</span>
-                </S.TabButton>
+              <S.TabButton
+                type="button"
+                className={!payWithCard ? 'isActive' : ''}
+                onClick={() => setPayWithCard(false)}
+              >
+                <img src={barcodeIco} alt="bank slip" />
+                <span>Bank Slip</span>
+              </S.TabButton>
+              <S.TabButton
+                type="button"
+                className={payWithCard ? 'isActive' : ''}
+                onClick={() => setPayWithCard(true)}
+              >
+                <img src={creditCardIco} alt="credit card" />
+                <span>Credit Card</span>
+              </S.TabButton>
               {!payWithCard ? (
                 <p>
                   If you choose this payment method, please note that

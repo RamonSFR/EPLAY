@@ -39,20 +39,21 @@ const ProductsList = ({ background, title, games, id, isLoading }: Props) => {
       <div className="container">
         <h2>{title}</h2>
         <S.List>
-          {games && games.map((game) => (
-            <li key={game.id}>
-              <Product
-                key={game.id}
-                id={game.id}
-                category={game.details.category}
-                image={`${ApiPath}${game.media.thumbnail}`}
-                infos={getGameTags(game)}
-                description={game.description}
-                system={game.details.system}
-                title={game.name}
-              />
-            </li>
-          ))}
+          {games &&
+            games.map((game) => (
+              <li key={game.id}>
+                <Product
+                  key={game.id}
+                  id={game.id}
+                  category={game.details.category}
+                  image={`${ApiPath}${game.media.thumbnail}`}
+                  infos={getGameTags(game)}
+                  description={game.description}
+                  system={game.details.system}
+                  title={game.name}
+                />
+              </li>
+            ))}
         </S.List>
       </div>
     </S.Container>

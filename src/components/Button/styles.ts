@@ -12,9 +12,11 @@ export const Btn = styled.button<Props>`
   font-size: 16px;
   border-radius: 8px;
   font-weight: bold;
-  border: 2px solid ${(props) => props.variant === 'primary' ? c.green : c.white};
+  border: 2px solid
+    ${(props) => (props.variant === 'primary' ? c.green : c.white)};
   color: ${c.white};
-  background-color: ${(props) => props.variant === 'primary' ? c.green : 'transparent'};
+  background-color: ${(props) =>
+    props.variant === 'primary' ? c.green : 'transparent'};
   cursor: pointer;
 `
 

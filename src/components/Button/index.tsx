@@ -21,7 +21,13 @@ const Button = ({
 }: Props) => {
   if (type === 'button' || type === 'submit') {
     return (
-      <S.Btn variant={variant} type={type} title={title} onClick={onClick} disabled={disabled}>
+      <S.Btn
+        variant={variant}
+        type={type}
+        title={title}
+        onClick={onClick}
+        disabled={disabled}
+      >
         {children}
       </S.Btn>
     )

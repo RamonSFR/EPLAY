@@ -8,7 +8,8 @@ export const Container = styled.div`
   border-radius: 8px;
   margin-bottom: 40px;
 
-  h2, h3 {
+  h2,
+  h3 {
     font-weight: bold;
     font-size: 18px;
     color: ${c.white};

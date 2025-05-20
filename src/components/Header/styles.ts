@@ -44,11 +44,14 @@ export const Header = styled.header`
     line-height: 0;
   }
 
-  img, a , span {
+  img,
+  a,
+  span {
     cursor: pointer;
   }
 
-  a, span {
+  a,
+  span {
     color: ${c.white};
     text-decoration: none;
     font-weight: bold;

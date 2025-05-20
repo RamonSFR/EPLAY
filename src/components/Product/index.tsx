@@ -30,7 +30,10 @@ const Product = ({
   }
 
   return (
-    <S.Card title={`click here to see more details of the game: ${title}`} to={`/product/${id}`}>
+    <S.Card
+      title={`click here to see more details of the game: ${title}`}
+      to={`/product/${id}`}
+    >
       <img draggable={false} src={image} />
       <S.Infos>
         {infos.map((info) => (

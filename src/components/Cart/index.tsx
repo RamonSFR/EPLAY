@@ -96,8 +96,10 @@ const Cart = () => {
             <S.Quantity>
               <img src={cartIco} />
               Your shopping cart is empty
-              </S.Quantity>
-              <p className='empty-message'>Add at least one game to process to checkout</p>
+            </S.Quantity>
+            <p className="empty-message">
+              Add at least one game to process to checkout
+            </p>
             <Button
               type="button"
               title="click to go back to shopping"
