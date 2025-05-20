@@ -34,6 +34,10 @@ export const InputGroup = styled.div<InputGroupProps>`
     padding: 0 8px;
     max-width: ${(props) => props.maxwidth || 'auto'};
   }
+
+  small {
+    color: ${c.red};
+  }
 `
 
 export const TabButton = styled.button`

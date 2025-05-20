@@ -7,9 +7,11 @@ import * as S from './styles'
 import creditCardIco from '../../assets/images/icons/credit-card.png'
 import barcodeIco from '../../assets/images/icons/barcode.png'
 import * as Yup from 'yup'
+import { usePurchaseMutation } from '../../services/api'
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
   const form = useFormik({
     initialValues: {
       fullName: '',
@@ -85,8 +87,40 @@ const Checkout = () => {
       )
     }),
     onSubmit: (values) => {
-      alert('success')
-      console.log(values)
+      purchase({
+        billing: {
+          name: values.fullName,
+          email: values.deliveryEmail,
+          phone: values.phone
+        },
+        delivery: {
+          address: values.address,
+          zipCode: values.zipCode,
+          email: values.deliveryEmail
+        },
+        payment: {
+          card: {
+            active: payWithCard,
+            owner: {
+              name: values.cardName
+            },
+            name: values.cardName,
+            number: values.cardNumber,
+            expires: {
+              month: Number(values.expirationDate.split('/')[0]),
+              year: Number(values.expirationDate.split('/')[1])
+            },
+            code: Number(values.cvv)
+          },
+          installments: Number(values.installments)
+        },
+        products: [
+          {
+            id: 1,
+            price: 10
+          }
+        ]
+      })
     }
   })
 
