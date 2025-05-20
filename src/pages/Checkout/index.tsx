@@ -11,7 +11,7 @@ import { usePurchaseMutation } from '../../services/api'
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
-  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [purchase] = usePurchaseMutation()
   const form = useFormik({
     initialValues: {
       fullName: '',
