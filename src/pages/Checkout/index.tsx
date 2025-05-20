@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import { Navigate } from 'react-router-dom'
+import { IMaskInput } from 'react-imask'
 import * as Yup from 'yup'
 
 import Button from '../../components/Button'
@@ -13,6 +14,7 @@ import { usePurchaseMutation } from '../../services/api'
 import type { RootReducer } from '../../store'
 import getTotal from '../../utils/functions/getTotal'
 import parseToUsd from '../../utils/functions/parseToUsd'
+import { clear } from '../../store/reducers/cart'
 
 import * as S from './styles'
 
@@ -26,6 +28,7 @@ const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { items } = useSelector((state: RootReducer) => state.cart)
+  const dispatch = useDispatch()
 
   const [installments, setInstallments] = useState<installment[]>([])
 
@@ -46,7 +49,6 @@ const Checkout = () => {
       installments: 1
     },
     validationSchema: Yup.object({
-      // Delivery Info
       fullName: Yup.string()
         .min(3, 'Full name must be at least 3 characters long')
         .required('Full name is required'),
@@ -66,7 +68,6 @@ const Checkout = () => {
         .required('Confirm E-mail is required'),
       phone: Yup.string().min(10, 'Phone number must have at least 10 digits'),
 
-      // Payment Info
       cardName: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
@@ -78,24 +79,32 @@ const Checkout = () => {
       cardNumber: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
-              .min(16, 'Card number must have 16 digits')
-              .max(16, 'Card number must have 16 digits')
+              .transform((value) => value.replace(/-/g, ''))
+              .length(16, 'Card number must have 16 digits')
               .required('Card number is required')
-              .required('Name on card is required')
           : schema
       ),
 
       expirationDate: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
-              .matches(
-                /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/,
-                'Invalid expiration date'
-              )
+              .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Invalid Format (MM/YY)')
+              .test('valid-date', 'Invalid Expiration Date', (value) => {
+                if (!value) return false
+                const [monthStr, yearStr] = value.split('/')
+                const month = parseInt(monthStr, 10)
+                const year = parseInt('20' + yearStr, 10)
+
+                const today = new Date()
+                const expDate = new Date(year, month - 1, 1)
+
+                return (
+                  expDate >= new Date(today.getFullYear(), today.getMonth(), 1)
+                )
+              })
               .required('Expiration date is required')
           : schema
       ),
-
       cvv: Yup.string().when((_values, schema) =>
         payWithCard
           ? schema
@@ -133,12 +142,10 @@ const Checkout = () => {
           },
           installments: Number(values.installments)
         },
-        products: [
-          {
-            id: 1,
-            price: 10
-          }
-        ]
+        products: items.map((item) => ({
+          id: item.id,
+          price: item.prices.current as number
+        }))
       })
     }
   })
@@ -161,7 +168,13 @@ const Checkout = () => {
     }
   }, [totalPrice])
 
-  if (items.length === 0) {
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear())
+    }
+  }, [isSuccess, dispatch])
+
+  if (items.length === 0 && !isSuccess) {
     return <Navigate to="/" />
   }
 
@@ -239,14 +252,15 @@ const Checkout = () => {
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="zipCode">ZIP Code</label>
-                  <input
-                    onChange={form.handleChange}
+                  <IMaskInput
+                    mask="00000"
+                    onAccept={(value) => form.setFieldValue('zipCode', value)}
                     onBlur={form.handleBlur}
                     name="zipCode"
                     value={form.values.zipCode}
                     placeholder="Your ZIP Code"
                     id="zipCode"
-                    type="number"
+                    type="string"
                     className={checkInputsHasErrors('zipCode') ? 'error' : ''}
                   />
                 </S.InputGroup>
@@ -289,8 +303,9 @@ const Checkout = () => {
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="phone">Phone Number</label>
-                  <input
-                    onChange={form.handleChange}
+                  <IMaskInput
+                    mask="(000) 000-0000"
+                    onAccept={(value) => form.setFieldValue('phone', value)}
                     onBlur={form.handleBlur}
                     name="phone"
                     value={form.values.phone}
@@ -304,22 +319,22 @@ const Checkout = () => {
           </Card>
           <Card title="Payment">
             <div>
-              <S.TabButton
-                type="button"
-                className={!payWithCard ? 'isActive' : ''}
-                onClick={() => setPayWithCard(false)}
-              >
-                <img src={barcodeIco} alt="bank slip" />
-                <span>Bank Slip</span>
-              </S.TabButton>
-              <S.TabButton
-                type="button"
-                className={payWithCard ? 'isActive' : ''}
-                onClick={() => setPayWithCard(true)}
-              >
-                <img src={creditCardIco} alt="credit card" />
-                <span>Credit Card</span>
-              </S.TabButton>
+                <S.TabButton
+                  type="button"
+                  className={!payWithCard ? 'isActive' : ''}
+                  onClick={() => setPayWithCard(false)}
+                >
+                  <img src={barcodeIco} alt="bank slip" />
+                  <span>Bank Slip</span>
+                </S.TabButton>
+                <S.TabButton
+                  type="button"
+                  className={payWithCard ? 'isActive' : ''}
+                  onClick={() => setPayWithCard(true)}
+                >
+                  <img src={creditCardIco} alt="credit card" />
+                  <span>Credit Card</span>
+                </S.TabButton>
               {!payWithCard ? (
                 <p>
                   If you choose this payment method, please note that
@@ -348,15 +363,17 @@ const Checkout = () => {
                     </S.InputGroup>
                     <S.InputGroup>
                       <label htmlFor="cardNumber">Card Number</label>
-                      <input
-                        onChange={form.handleChange}
+                      <IMaskInput
+                        mask="0000-0000-0000-0000"
+                        onAccept={(value) =>
+                          form.setFieldValue('cardNumber', value)
+                        }
                         onBlur={form.handleBlur}
                         name="cardNumber"
                         value={form.values.cardNumber}
                         placeholder="0000-0000-0000-0000"
                         id="cardNumber"
                         type="text"
-                        maxLength={16}
                         className={
                           checkInputsHasErrors('cardNumber') ? 'error' : ''
                         }
@@ -366,13 +383,15 @@ const Checkout = () => {
                   <S.Row margintop="24px">
                     <S.InputGroup maxwidth="123px" defaultflex="flex">
                       <label htmlFor="expirationDate">Expiration Date</label>
-                      <input
-                        onChange={form.handleChange}
+                      <IMaskInput
+                        onAccept={(value) =>
+                          form.setFieldValue('expirationDate', value)
+                        }
                         onBlur={form.handleBlur}
                         id="expirationDate"
                         type="text"
                         placeholder="MM/YY"
-                        maxLength={4}
+                        mask="00/00"
                         value={form.values.expirationDate}
                         className={
                           checkInputsHasErrors('expirationDate') ? 'error' : ''
@@ -381,15 +400,15 @@ const Checkout = () => {
                     </S.InputGroup>
                     <S.InputGroup maxwidth="64px" defaultflex="flex">
                       <label htmlFor="cvv">CVV</label>
-                      <input
-                        onChange={form.handleChange}
+                      <IMaskInput
+                        onAccept={(value) => form.setFieldValue('cvv', value)}
                         onBlur={form.handleBlur}
                         name="cvv"
+                        mask="000"
                         value={form.values.cvv}
                         placeholder="000"
                         id="cvv"
                         type="text"
-                        maxLength={3}
                         className={checkInputsHasErrors('cvv') ? 'error' : ''}
                       />
                     </S.InputGroup>

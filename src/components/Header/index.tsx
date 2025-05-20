@@ -24,7 +24,9 @@ const Header = () => {
             <span />
           </S.Hamburger>
           <Link to="/">
-            <img src={logo} alt="EPLAY" />
+            <h1>
+              <img src={logo} alt="EPLAY" />
+            </h1>
           </Link>
           <nav>
             <S.Links>

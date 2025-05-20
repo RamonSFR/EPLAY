@@ -28,7 +28,7 @@ export const List = styled.ul`
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     grid-template-columns: 1fr;
   }
 `

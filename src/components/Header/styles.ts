@@ -6,7 +6,7 @@ export const Links = styled.ul`
   display: flex;
   margin-left: 40px;
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     margin-left: 0;
     display: block;
   }
@@ -23,7 +23,7 @@ export const NavMobile = styled.nav`
 export const LinkItem = styled.li`
   margin-right: 16px;
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     margin-right: 0;
 
     a {
@@ -40,6 +40,10 @@ export const Header = styled.header`
   border-radius: 16px;
   margin-bottom: 80px;
 
+  h1 {
+    line-height: 0;
+  }
+
   img, a , span {
     cursor: pointer;
   }
@@ -50,7 +54,7 @@ export const Header = styled.header`
     font-weight: bold;
   }
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
   }
 `
 
@@ -62,7 +66,7 @@ export const CartButton = styled.span`
     margin-left: 16px;
   }
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     span {
       display: none;
     }
@@ -81,7 +85,7 @@ export const Hamburger = styled.div`
     margin-bottom: 4px;
   }
 
-  @media screen and (min-width: ${breakpoints.tabet}) {
+  @media screen and (min-width: ${breakpoints.tablet}) {
     display: none;
   }
 `
@@ -94,7 +98,7 @@ export const HeaderRow = styled.div`
     display: flex;
     align-items: center;
 
-    @media screen and (max-width: ${breakpoints.tabet}) {
+    @media screen and (max-width: ${breakpoints.tablet}) {
       flex: 1;
       justify-content: space-between;
       ${Links} {

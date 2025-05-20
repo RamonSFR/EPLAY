@@ -6,7 +6,7 @@ export const Items = styled.ul`
   flex-wrap: wrap;
   gap: 16px;
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     gap: 8px;
   }
 `
@@ -36,7 +36,7 @@ export const Item = styled.li`
     width: 150px;
     object-fit: cover;
 
-    @media screen and (max-width: ${breakpoints.tabet}) {
+    @media screen and (max-width: ${breakpoints.tablet}) {
       height: 125px;
       width: 125px;
     }

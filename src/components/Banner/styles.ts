@@ -36,7 +36,7 @@ export const Image = styled.div`
     content: '';
   }
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     background-size: cover;
     background-position-x: center;
   }
@@ -46,7 +46,7 @@ export const Title = styled.h2`
   font-size: 36px;
   max-width: 450px;
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     font-size: 28px;
     max-width: 300px;
   }

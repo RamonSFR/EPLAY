@@ -54,7 +54,7 @@ export const SideBar = styled.aside`
     margin-bottom: 16px;
   }
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     max-width: 250px;
   }
 `
@@ -106,7 +106,7 @@ export const CartItem = styled.li`
     font-weight: bold;
     color: ${c.white};
 
-    @media screen and (max-width: ${breakpoints.tabet}) {
+    @media screen and (max-width: ${breakpoints.tablet}) {
       font-size: 14px;
     }
   }
@@ -117,7 +117,7 @@ export const CartItem = styled.li`
     font-weight: bold;
     color: ${c.white};
 
-    @media screen and (max-width: ${breakpoints.tabet}) {
+    @media screen and (max-width: ${breakpoints.tablet}) {
       margin-top: 24px;
       font-size: 16px;
     }
@@ -126,7 +126,7 @@ export const CartItem = styled.li`
   ${TagContainer} {
     margin: 8px 8px 16px 0;
 
-    @media screen and (max-width: ${breakpoints.tabet}) {
+    @media screen and (max-width: ${breakpoints.tablet}) {
       display: none;
     }
   }

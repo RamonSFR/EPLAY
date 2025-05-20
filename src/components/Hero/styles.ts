@@ -37,7 +37,7 @@ export const Banner = styled.div`
     justify-content: space-between;
   }
 
-  @media screen and (max-width: ${breakpoints.tabet}) {
+  @media screen and (max-width: ${breakpoints.tablet}) {
     background-size: cover;
     background-position-x: center;
   }
