@@ -39,6 +39,10 @@ type PurchasePayload = {
   }
 }
 
+type PurchaseResponse = {
+  orderId: string
+}
+
 const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: ApiPath
@@ -77,7 +81,7 @@ const api = createApi({
     getGame: builder.query<Game, string>({
       query: (id) => `/games/${id}`
     }),
-    purchase: builder.mutation<unknown, PurchasePayload>({
+    purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
       query: (body) => ({
         url: 'checkout',
         method: 'POST',

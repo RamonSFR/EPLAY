@@ -23,4 +23,8 @@ export const Container = styled.div`
   .margin-top {
     margin-top: 24px;
   }
+
+  .margin-bottom {
+    margin-bottom: 32px;
+  }
 `
