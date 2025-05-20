@@ -1,7 +1,7 @@
 import { Btn, BtnLink } from './styles'
 
 type Props = {
-  type: 'button' | 'link'
+  type: 'button' | 'link' | 'submit'
   title: string
   to?: string
   onClick?: () => void
@@ -17,7 +17,7 @@ const Button = ({
   to,
   variant = 'primary'
 }: Props) => {
-  if (type === 'button') {
+  if (type === 'button' || type === 'submit') {
     return (
       <Btn variant={variant} type="button" title={title} onClick={onClick}>
         {children}
