@@ -1,13 +1,23 @@
 import styled from 'styled-components'
 import { colors as c } from '../../styles/globalStyle'
 
-export const Row = styled.div`
+type InputGroupProps = {
+  maxwidth?: string
+  defaultflex?: string
+}
+
+type RowProps = {
+  margintop?: string
+}
+
+export const Row = styled.div<RowProps>`
   display: flex;
   column-gap: 24px;
+  margin-top: ${(props) => props.margintop || '0px'};
 `
 
-export const InputGroup = styled.div`
-  flex: auto;
+export const InputGroup = styled.div<InputGroupProps>`
+  flex: ${(props) => (props.defaultflex === 'flex' ? '' : 'auto')};
 
   label {
     display: block;
@@ -15,11 +25,13 @@ export const InputGroup = styled.div`
     margin-bottom: 8px;
   }
 
-  input {
+  input,
+  select {
     background-color: ${c.white};
     border: 1px solid ${c.white};
     height: 32px;
     width: 100%;
     padding: 0 8px;
+    max-width: ${(props) => props.maxwidth || 'auto'};
   }
 `
