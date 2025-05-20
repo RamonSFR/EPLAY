@@ -1,54 +1,95 @@
-# React + TypeScript + Vite
+<p align="center"><img src="./src/assets/images/icons/logo.svg" width="125px"></p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+EPLAY is a simulated video game ecommerce platform made for the "Front-end Engineer" course at EBAC
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Functionalities
+
+- Displays multiple game with their tags and categories
+- Displays a different random game every time user access the page
+- Exclusive product page for every game avaliable
+- Shopping Cart
+- Validated Checkout
+
+## Instalation requirements
+
+- Git
+- Node
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/RamonSFR/EPLAY.git
+cd EPLAY
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Run server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+## Connecting to your API
+
+All the games data comes from an API that you can change to your own to display your custom games
+
+### go to the path
+
+```
+  📁 EPLAY
+│-- 📁 src
+│     │-- 📁 services
+│     │    │-- api.ts
+│     │
+│     │
+│     │
+│     │
+│     │
+│     │
+```
+
+### change the API Path to yours
+
+```bash
+export const ApiPath = 'https://your-api/'
+```
+
+### and configure your endpoints
+notice that the type Game has the following structure
+```bash
+Game = {
+  id: number
+  name: string
+  description: string
+  release_date?: string
+  prices: {
+    discount?: number
+    old?: number
+    current?: number
+  }
+  details: {
+    category: string
+    system: string[]
+    developer: string
+    publisher: string
+    languages: string[]
+  }
+  media: {
+    thumbnail: string
+    cover: string
+    gallery: GalleryItem[]
+  }
+```
+so make sure your api have the same or change the code to attend to it
