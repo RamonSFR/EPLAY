@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,32 +10,56 @@ import type { RootReducer } from '../../store'
 
 const Header = () => {
   const dispatch = useDispatch()
-  const { items } = useSelector((state:RootReducer) => state.cart)
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const [navIsOpen, setNavIsOpen] = useState(false)
 
   return (
     <S.Header>
-      <div>
-        <Link to="/">
-          <img src={logo} alt="EPLAY" />
-        </Link>
-        <nav>
-          <S.Links>
-            <li>
-              <Link to="/categories">Categories</Link>
-            </li>
-            <li>
-              <Link to="/releases">Releases</Link>
-            </li>
-            <li>
-              <Link to="/promos">Promos</Link>
-            </li>
-          </S.Links>
-        </nav>
-      </div>
-      <S.CartButton onClick={() => dispatch(open())}>
-        {items.length} - produtos
-        <img src={cartSvg} alt="cart" />
-      </S.CartButton>
+      <S.HeaderRow>
+        <div>
+          <S.Hamburger onClick={() => setNavIsOpen(!navIsOpen)}>
+            <span />
+            <span />
+            <span />
+          </S.Hamburger>
+          <Link to="/">
+            <img src={logo} alt="EPLAY" />
+          </Link>
+          <nav>
+            <S.Links>
+              <S.LinkItem>
+                <Link to="/categories">Categories</Link>
+              </S.LinkItem>
+              <S.LinkItem>
+                <Link to="/releases">Releases</Link>
+              </S.LinkItem>
+              <S.LinkItem>
+                <Link to="/promos">Promos</Link>
+              </S.LinkItem>
+            </S.Links>
+          </nav>
+        </div>
+        <S.CartButton onClick={() => dispatch(open())}>
+          <p>
+            {items.length}
+            <span> - produto(s)</span>
+          </p>
+          <img src={cartSvg} alt="cart" />
+        </S.CartButton>
+      </S.HeaderRow>
+      <S.NavMobile className={navIsOpen ? '-isOpen' : ''}>
+        <S.Links>
+          <S.LinkItem>
+            <Link to="/categories">Categories</Link>
+          </S.LinkItem>
+          <S.LinkItem>
+            <Link to="/releases">Releases</Link>
+          </S.LinkItem>
+          <S.LinkItem>
+            <Link to="/promos">Promos</Link>
+          </S.LinkItem>
+        </S.Links>
+      </S.NavMobile>
     </S.Header>
   )
 }
