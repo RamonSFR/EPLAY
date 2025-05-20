@@ -18,6 +18,7 @@ export const SectionTitle = styled.h4`
 export const Links = styled.ul`
   display: flex;
   margin-top: 16px;
+  flex-wrap: wrap;
 `
 
 export const Link = styled(HashLink)`
