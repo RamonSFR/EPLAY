@@ -4,7 +4,6 @@ import Button from '../Button'
 import Tag from '../Tag'
 import setSystems from '../../utils/functions/setSystems'
 import Loader from '../Loader'
-import type { Game } from '../../pages/Home'
 
 import { add, open } from '../../store/reducers/cart'
 import { ApiPath } from '../../services/api'

@@ -1,4 +1,3 @@
-import type { Game } from '../../pages/Home'
 import { ApiPath } from '../../services/api'
 import parseToUsd from '../../utils/functions/parseToUsd'
 import Loader from '../Loader'

@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import type { Game } from '../pages/Home'
-
 export const ApiPath = 'https://fake-api-xyxf.vercel.app/'
 
 type Product = {

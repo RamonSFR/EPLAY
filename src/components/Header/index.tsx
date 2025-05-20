@@ -49,7 +49,7 @@ const Header = () => {
             </S.Links>
           </nav>
         </div>
-        <S.CartButton onClick={() => dispatch(open())}>
+        <S.CartButton role="button" onClick={() => dispatch(open())}>
           <p>
             {items.length}
             <span> - produto(s)</span>

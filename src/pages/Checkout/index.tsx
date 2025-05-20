@@ -24,8 +24,9 @@ type installment = {
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
-  const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { items } = useSelector((state: RootReducer) => state.cart)
+
   const [installments, setInstallments] = useState<installment[]>([])
 
   const totalPrice = getTotal(items)
@@ -303,16 +304,16 @@ const Checkout = () => {
           </Card>
           <Card title="Payment">
             <div>
-                <S.TabButton
-                  type='button'
+              <S.TabButton
+                type="button"
                 className={!payWithCard ? 'isActive' : ''}
                 onClick={() => setPayWithCard(false)}
               >
                 <img src={barcodeIco} alt="bank slip" />
                 <span>Bank Slip</span>
               </S.TabButton>
-                <S.TabButton
-                  type='button'
+              <S.TabButton
+                type="button"
                 className={payWithCard ? 'isActive' : ''}
                 onClick={() => setPayWithCard(true)}
               >
@@ -404,12 +405,16 @@ const Checkout = () => {
                           checkInputsHasErrors('installments') ? 'error' : ''
                         }
                       >
-                        {totalPrice >= 100 ? (installments.map((installment) => (
-                          <option key={installment.quantity}>
-                            {installment.quantity}x of{' '}
-                            {installment.formattedAmount}
-                          </option>
-                        ))) : (<option>1x of {parseToUsd(totalPrice)}</option>)}
+                        {totalPrice >= 100 ? (
+                          installments.map((installment) => (
+                            <option key={installment.quantity}>
+                              {installment.quantity}x of{' '}
+                              {installment.formattedAmount}
+                            </option>
+                          ))
+                        ) : (
+                          <option>1x of {parseToUsd(totalPrice)}</option>
+                        )}
                       </select>
                     </S.InputGroup>
                   </S.Row>
@@ -422,8 +427,9 @@ const Checkout = () => {
             onClick={form.handleSubmit}
             variant="primary"
             title="click to finish purchase"
+            disabled={isLoading}
           >
-            Finish Purchase
+            {isLoading ? 'Processing...' : 'Finish Purchase'}
           </Button>
         </form>
       )}

@@ -32,8 +32,6 @@ const Cart = () => {
     dispatch(close())
   }
 
-
-
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => {
@@ -47,30 +45,36 @@ const Cart = () => {
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
       <S.Overlay onClick={() => dispatch(close())} />
       <S.SideBar>
-        <ul>
-          {items.map((item) => (
-            <S.CartItem key={item.id}>
-              <img src={`${ApiPath}${item.media.thumbnail}`} alt={item.name} />
-              <div>
-                <h3>{item.name}</h3>
-                <Tag>{item.details.category}</Tag>
-                <Tag>{setSystems(item.details.system)}</Tag>
-                <span>{parseToUsd(item.prices.current)}</span>
-              </div>
-              <button type="button" onClick={() => dispatch(remove(item.id))} />
-            </S.CartItem>
-          ))}
-        </ul>
-        <S.Quantity>
-          <img src={cartIco} />
-          {items.length} game(s) on your Cart{' '}
-        </S.Quantity>
-        <S.Prices>
-          Total of {parseToUsd(total)}{' '}
-          {total >= 100 ? <span>Up to 6x, interest-free</span> : ''}
-        </S.Prices>
         {items.length > 0 ? (
           <>
+            <ul>
+              {items.map((item) => (
+                <S.CartItem key={item.id}>
+                  <img
+                    src={`${ApiPath}${item.media.thumbnail}`}
+                    alt={item.name}
+                  />
+                  <div>
+                    <h3>{item.name}</h3>
+                    <Tag>{item.details.category}</Tag>
+                    <Tag>{setSystems(item.details.system)}</Tag>
+                    <span>{parseToUsd(item.prices.current)}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => dispatch(remove(item.id))}
+                  />
+                </S.CartItem>
+              ))}
+            </ul>
+            <S.Quantity>
+              <img src={cartIco} />
+              {items.length} game(s) on your Cart{' '}
+            </S.Quantity>
+            <S.Prices>
+              Total of {parseToUsd(total)}{' '}
+              {total >= 100 ? <span>Up to 6x, interest-free</span> : ''}
+            </S.Prices>
             <S.ClearCartBtn
               type="button"
               title="click to clear your cart"
@@ -88,13 +92,20 @@ const Cart = () => {
             </Button>
           </>
         ) : (
-          <Button
-            type="button"
-            title="click to go back to shopping"
-            onClick={() => dispatch(close())}
-          >
-            Back to shopping
-          </Button>
+          <>
+            <S.Quantity>
+              <img src={cartIco} />
+              Your shopping cart is empty
+              </S.Quantity>
+              <p className='empty-message'>Add at least one game to process to checkout</p>
+            <Button
+              type="button"
+              title="click to go back to shopping"
+              onClick={() => dispatch(close())}
+            >
+              Back to shopping
+            </Button>
+          </>
         )}
       </S.SideBar>
     </S.CartContainer>

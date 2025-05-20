@@ -40,11 +40,11 @@ export const Header = styled.header`
   border-radius: 16px;
   margin-bottom: 80px;
 
-  img {
+  img, a , span {
     cursor: pointer;
   }
 
-  a {
+  a, span {
     color: ${c.white};
     text-decoration: none;
     font-weight: bold;
@@ -54,10 +54,9 @@ export const Header = styled.header`
   }
 `
 
-export const CartButton = styled.a`
+export const CartButton = styled.span`
   display: flex;
   align-items: center;
-  cursor: pointer;
 
   img {
     margin-left: 16px;

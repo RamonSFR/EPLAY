@@ -47,6 +47,13 @@ export const SideBar = styled.aside`
     width: 100%;
   }
 
+  .empty-message {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${c.white};
+    margin-bottom: 16px;
+  }
+
   @media screen and (max-width: ${breakpoints.tabet}) {
     max-width: 250px;
   }
