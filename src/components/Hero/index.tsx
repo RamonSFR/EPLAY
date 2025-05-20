@@ -2,12 +2,13 @@ import { useDispatch } from 'react-redux'
 
 import Button from '../Button'
 import Tag from '../Tag'
+import setSystems from '../../utils/functions/setSystems'
+import Loader from '../Loader'
 import type { Game } from '../../pages/Home'
 
 import { add, open } from '../../store/reducers/cart'
 import { ApiPath } from '../../services/api'
 import parseToUsd from '../../utils/functions/parseToUsd'
-import setSystems from '../../utils/functions/setSystems'
 
 import * as S from './styles'
 
@@ -26,7 +27,7 @@ const Hero = ({ game }: Props) => {
   if (!game) {
     return (
       <div className="container">
-        <h3>Loading...</h3>
+        <Loader />
       </div>
     )
   }

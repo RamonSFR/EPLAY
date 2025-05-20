@@ -10,31 +10,65 @@ import {
 } from '../../services/api'
 
 const Categories = () => {
-  const { data: rpg } = useGetRpgQuery()
-  const { data: action } = useGetActionQuery()
-  const { data: horror } = useGetHorrorQuery()
-  const { data: fps } = useGetFPSQuery()
-  const { data: sports } = useGetSportsQuery()
-  const { data: sim } = useGetSimQuery()
-  const { data: puzzle } = useGetPuzzleQuery()
-
-  if (!rpg || !action || !horror || !fps || !sports || !sim || !puzzle) {
-    return (
-      <div className="container">
-        <h3>Loading...</h3>
-      </div>
-    )
-  }
+  const { data: rpg, isLoading: isLoadingRpg } = useGetRpgQuery()
+  const { data: action, isLoading: isLoadingAction } = useGetActionQuery()
+  const { data: horror, isLoading: isLoadingHorror } = useGetHorrorQuery()
+  const { data: fps, isLoading: isLoadingFps } = useGetFPSQuery()
+  const { data: sports, isLoading: isLoadingSports } = useGetSportsQuery()
+  const { data: sim, isLoading: isLoadingSim } = useGetSimQuery()
+  const { data: puzzle, isLoading: isLoadingPuzzle } = useGetPuzzleQuery()
 
   return (
     <>
-      <ProductsList id='rpg' games={rpg} title="RPG" background="black" />
-      <ProductsList id='action-adventure' games={action} title="Action/Adventure" background="grey" />
-      <ProductsList id='horror' games={horror} title="Horror" background="black" />
-      <ProductsList id='fps' games={fps} title="FPS" background="grey" />
-      <ProductsList id='sports' games={sports} title="Sports" background="black" />
-      <ProductsList id='sim' games={sim} title="Simulation" background="grey" />
-      <ProductsList id='puzzle' games={puzzle} title="Puzzle" background="black" />
+      <ProductsList
+        id="rpg"
+        games={rpg}
+        title="RPG"
+        background="black"
+        isLoading={isLoadingRpg}
+      />
+      <ProductsList
+        id="action-adventure"
+        games={action}
+        title="Action/Adventure"
+        background="grey"
+        isLoading={isLoadingAction}
+      />
+      <ProductsList
+        id="horror"
+        games={horror}
+        title="Horror"
+        background="black"
+        isLoading={isLoadingHorror}
+      />
+      <ProductsList
+        id="fps"
+        games={fps}
+        title="FPS"
+        background="grey"
+        isLoading={isLoadingFps}
+      />
+      <ProductsList
+        id="sports"
+        games={sports}
+        title="Sports"
+        background="black"
+        isLoading={isLoadingSports}
+      />
+      <ProductsList
+        id="sim"
+        games={sim}
+        title="Simulation"
+        background="grey"
+        isLoading={isLoadingSim}
+      />
+      <ProductsList
+        id="puzzle"
+        games={puzzle}
+        title="Puzzle"
+        background="black"
+        isLoading={isLoadingPuzzle}
+      />
     </>
   )
 }

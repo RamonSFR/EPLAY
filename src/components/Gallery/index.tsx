@@ -77,7 +77,7 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
         <S.ModalContent className="container">
           <header>
             <h4>{name}</h4>
-            <img src={closeIco} onClick={closeModal} alt="close icon" />
+            <img src={closeIco} onClick={closeModal} alt="close icon"/>
           </header>
           {modal.type === 'image' ? (
             <img src={`${ApiPath}${modal.url}`} />

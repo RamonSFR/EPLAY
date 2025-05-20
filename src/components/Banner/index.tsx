@@ -1,5 +1,6 @@
 import Tag from '../Tag'
 import Button from '../Button'
+import Loader from '../Loader'
 
 import { ApiPath, useGetFeaturedGameQuery } from '../../services/api'
 import parseToUsd from '../../utils/functions/parseToUsd'
@@ -10,11 +11,7 @@ const Banner = () => {
   const { data: game } = useGetFeaturedGameQuery()
 
   if (!game) {
-    return (
-      <div className="container">
-        <h3>Loading...</h3>
-      </div>
-    )
+    return <Loader />
   }
 
   return (

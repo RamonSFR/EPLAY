@@ -49,37 +49,37 @@ const api = createApi({
   }),
   endpoints: (builder) => ({
     getFeaturedGame: builder.query<Game, void>({
-      query: () => '/highlight'
+      query: () => 'highlight'
     }),
     getOnSale: builder.query<Game[], void>({
-      query: () => '/onsale'
+      query: () => 'onsale'
     }),
     getComingSoon: builder.query<Game[], void>({
-      query: () => '/comingsoon'
+      query: () => 'comingsoon'
     }),
     getAction: builder.query<Game[], void>({
-      query: () => '/action'
+      query: () => 'action'
     }),
     getRpg: builder.query<Game[], void>({
-      query: () => '/rpg'
+      query: () => 'rpg'
     }),
     getHorror: builder.query<Game[], void>({
-      query: () => '/horror'
+      query: () => 'horror'
     }),
     getFPS: builder.query<Game[], void>({
-      query: () => '/FPS'
+      query: () => 'FPS'
     }),
     getSports: builder.query<Game[], void>({
-      query: () => '/sports'
+      query: () => 'sports'
     }),
     getSim: builder.query<Game[], void>({
-      query: () => '/sim'
+      query: () => 'sim'
     }),
     getPuzzle: builder.query<Game[], void>({
-      query: () => '/puzzle'
+      query: () => 'puzzle'
     }),
     getGame: builder.query<Game, string>({
-      query: (id) => `/games/${id}`
+      query: (id) => `games/${id}`
     }),
     purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
       query: (body) => ({
