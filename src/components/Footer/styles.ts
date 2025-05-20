@@ -4,7 +4,7 @@ import { colors as c } from '../../styles/globalStyle'
 
 export const Container = styled.footer`
   padding: 32px 0;
-  background-color: ${c.grey};
+  background-color: ${c.gray};
   font-size: 14px;
   margin-top: 40px;
 `
@@ -21,7 +21,7 @@ export const Links = styled.ul`
 `
 
 export const Link = styled(HashLink)`
-  color: ${c.grey2};
+  color: ${c.gray2};
   text-decoration: none;
   margin-right: 8px;
 `

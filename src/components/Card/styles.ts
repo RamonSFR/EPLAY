@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { colors as c } from '../../styles/globalStyle'
 
 export const Container = styled.div`
-  background-color: ${c.grey};
+  background-color: ${c.gray};
   padding: 24px;
   border-radius: 8px;
   margin-bottom: 40px;

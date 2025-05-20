@@ -35,7 +35,7 @@ export const LinkItem = styled.li`
 `
 
 export const Header = styled.header`
-  background-color: ${c.grey};
+  background-color: ${c.gray};
   padding: 24px;
   border-radius: 16px;
   margin-bottom: 80px;

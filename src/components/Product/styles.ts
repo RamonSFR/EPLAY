@@ -7,7 +7,7 @@ import { TagContainer } from '../Tag/styles'
 export const Card = styled(Link)`
   padding: 8px;
   border-radius: 8px;
-  background-color: ${c.grey};
+  background-color: ${c.gray};
   position: relative;
   cursor: pointer;
   text-decoration: none;

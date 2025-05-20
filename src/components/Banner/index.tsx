@@ -2,7 +2,7 @@ import Tag from '../Tag'
 import Button from '../Button'
 
 import { ApiPath, useGetFeaturedGameQuery } from '../../services/api'
-import priceFormatter from '../../utils/functions/priceFormatter'
+import parseToUsd from '../../utils/functions/parseToUsd'
 
 import * as S from './styles'
 
@@ -34,11 +34,11 @@ const Banner = () => {
               <>
                 {game?.prices.old ? (
                   <>
-                    from <span>{priceFormatter(game.prices.old)}</span> <br />
-                    to {priceFormatter(game.prices.current)}
+                    from <span>{parseToUsd(game.prices.old)}</span> <br />
+                    to {parseToUsd(game.prices.current)}
                   </>
                 ) : (
-                  <>{priceFormatter(game?.prices.current)}</>
+                  <>{parseToUsd(game?.prices.current)}</>
                 )}
               </>
             )}

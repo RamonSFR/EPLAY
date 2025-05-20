@@ -31,7 +31,7 @@ export const CartContainer = styled.div`
 `
 
 export const SideBar = styled.aside`
-  background-color: ${c.grey};
+  background-color: ${c.gray};
   z-index: 1;
   padding: 40px 16px 0 16px;
   max-width: 512px;
@@ -61,7 +61,7 @@ export const Prices = styled.p`
   span {
     display: block;
     font-size: 12px;
-    color: ${c.grey2};
+    color: ${c.gray2};
   }
 `
 
@@ -82,7 +82,7 @@ export const Quantity = styled.p`
 
 export const CartItem = styled.li`
   display: flex;
-  border-bottom: 1px solid ${c.grey2};
+  border-bottom: 1px solid ${c.gray2};
   margin-bottom: 16px;
   padding: 8px 0;
   position: relative;

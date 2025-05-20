@@ -1,13 +1,15 @@
 import { useDispatch } from 'react-redux'
 
-import type { Game } from '../../pages/Home'
-import { Banner, Infos } from './styles'
-import priceFormatter from '../../utils/functions/priceFormatter'
-import setSystems from '../../utils/functions/setSystems'
-import { add, open } from '../../store/reducers/cart'
 import Button from '../Button'
 import Tag from '../Tag'
+import type { Game } from '../../pages/Home'
+
+import { add, open } from '../../store/reducers/cart'
 import { ApiPath } from '../../services/api'
+import parseToUsd from '../../utils/functions/parseToUsd'
+import setSystems from '../../utils/functions/setSystems'
+
+import * as S from './styles'
 
 type Props = {
   game: Game
@@ -30,7 +32,7 @@ const Hero = ({ game }: Props) => {
   }
 
   return (
-    <Banner
+    <S.Banner
       style={{
         backgroundImage: `url(${ApiPath}${game.media.cover})`
       }}
@@ -40,7 +42,7 @@ const Hero = ({ game }: Props) => {
           <Tag>{game.details.category}</Tag>
           <Tag>{setSystems(game.details.system)}</Tag>
         </div>
-        <Infos>
+        <S.Infos>
           <h2>{game.name}</h2>
           {game.prices.current === null ? (
             <p>Coming Soon</p>
@@ -48,11 +50,11 @@ const Hero = ({ game }: Props) => {
             <>
               {game?.prices.old ? (
                 <p>
-                  from <span>{priceFormatter(game.prices.old)}</span> <br />
-                  to {priceFormatter(game.prices.current)}
+                  from <span>{parseToUsd(game.prices.old)}</span> <br />
+                  to {parseToUsd(game.prices.current)}
                 </p>
               ) : (
-                <p>{priceFormatter(game?.prices.current)}</p>
+                <p>{parseToUsd(game?.prices.current)}</p>
               )}
               <Button
                 type="button"
@@ -64,9 +66,9 @@ const Hero = ({ game }: Props) => {
               </Button>
             </>
           )}
-        </Infos>
+        </S.Infos>
       </div>
-    </Banner>
+    </S.Banner>
   )
 }
 

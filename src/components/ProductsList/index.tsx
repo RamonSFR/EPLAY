@@ -1,6 +1,6 @@
 import type { Game } from '../../pages/Home'
 import { ApiPath } from '../../services/api'
-import priceFormatter from '../../utils/functions/priceFormatter'
+import parseToUsd from '../../utils/functions/parseToUsd'
 import Product from '../Product'
 import * as S from './styles'
 
@@ -10,8 +10,6 @@ export type Props = {
   games: Game[]
   id?: string
 }
-
-
 
 const ProductsList = ({ background, title, games, id }: Props) => {
   const getGameTags = (game: Game) => {
@@ -25,7 +23,7 @@ const ProductsList = ({ background, title, games, id }: Props) => {
     }
 
     if (game.prices.current) {
-      tags.push(priceFormatter(game.prices.current))
+      tags.push(parseToUsd(game.prices.current))
     }
 
     return tags

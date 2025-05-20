@@ -11,9 +11,10 @@ import { clear, close, remove } from '../../store/reducers/cart'
 import { ApiPath } from '../../services/api'
 
 import setSystems from '../../utils/functions/setSystems'
-import priceFormatter from '../../utils/functions/priceFormatter'
+
 
 import * as S from './styles'
+import parseToUsd from '../../utils/functions/parseToUsd'
 
 const Cart = () => {
   const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
@@ -47,7 +48,7 @@ const Cart = () => {
                 <h3>{item.name}</h3>
                 <Tag>{item.details.category}</Tag>
                 <Tag>{setSystems(item.details.system)}</Tag>
-                <span>{priceFormatter(item.prices.current)}</span>
+                <span>{parseToUsd(item.prices.current)}</span>
               </div>
               <button type="button" onClick={() => dispatch(remove(item.id))} />
             </S.CartItem>
@@ -58,7 +59,7 @@ const Cart = () => {
           {items.length} game(s) on your Cart{' '}
         </S.Quantity>
         <S.Prices>
-          Total of {priceFormatter(total)}{' '}
+          Total of {parseToUsd(total)}{' '}
           {total >= 100 ? <span>Up to 6x, interest-free</span> : ''}
         </S.Prices>
         {items.length > 0 ? (

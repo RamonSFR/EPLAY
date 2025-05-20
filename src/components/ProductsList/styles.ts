@@ -7,11 +7,11 @@ import { Card } from '../Product/styles'
 export const Container = styled.section<Omit<Props, 'title' | 'games'>>`
   padding: 32px 0;
   background-color: ${(props) =>
-    props.background === 'grey' ? c.grey : c.black};
+    props.background === 'grey' ? c.gray : c.black};
 
   ${Card} {
     background-color: ${(props) =>
-      props.background === 'grey' ? c.black : c.grey};
+      props.background === 'grey' ? c.black : c.gray};
     box-shadow: 4px 4px 14px
       ${(props) =>
         props.background === 'grey' ? 'rgba(0,0,0,.45)' : 'rgba(51,51,51,.45)'};
