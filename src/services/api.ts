@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import type { Game } from '../pages/Home'
 
-export const ApiPath = 'https://fake-api-seven-wine.vercel.app'
+export const ApiPath = 'https://fake-api-xyxf.vercel.app/'
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -13,7 +13,7 @@ const api = createApi({
       query: () => '/highlight'
     }),
     getOnSale: builder.query<Game[], void>({
-      query: () => '/promo'
+      query: () => '/onsale'
     }),
     getComingSoon: builder.query<Game[], void>({
       query: () => '/comingsoon'
