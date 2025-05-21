@@ -54,7 +54,7 @@ const Header = () => {
         <S.CartButton role="button" onClick={() => dispatch(open())}>
           <p>
             {items.length}
-            <span> - produto(s)</span>
+            <span> - product(s)</span>
           </p>
           <img src={cartSvg} alt="cart" />
         </S.CartButton>
