@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const ApiPath = 'https://fake-api-xyxf.vercel.app/eplay'
+export const ApiPath = 'https://fake-api-virid.vercel.app/eplay'
 
 type Product = {
   id: number
