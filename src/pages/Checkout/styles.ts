@@ -73,3 +73,12 @@ export const TabButton = styled.button`
     width: 100%;
   }
 `
+
+export const Disclaimer = styled.span`
+  margin: 32px 0;
+  font-size: 12px;
+  color: ${c.gray};
+  margin-top: 16px;
+  display: block;
+  text-align: center;
+`
